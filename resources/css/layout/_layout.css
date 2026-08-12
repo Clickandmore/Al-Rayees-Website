@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Layout primitives — container, section rhythm, grids
+   ========================================================================== */
+
+.container {
+    inline-size: 100%;
+    max-inline-size: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.container--narrow {
+    max-inline-size: var(--container-narrow);
+}
+
+.section {
+    position: relative;
+    padding-block: var(--section-y);
+    scroll-margin-block-start: var(--header-h);
+}
+
+.section--tight {
+    padding-block: clamp(3rem, 6vw, 6rem);
+}
+
+.section--flush-top {
+    padding-block-start: 0;
+}
+
+.section__inner {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.25rem, 4.5vw, 4.25rem);
+}
+
+/* A hairline that fades from the edges — used between major bands. */
+.rule {
+    block-size: 1px;
+    border: 0;
+    background: linear-gradient(to right, transparent, var(--line-2) 18%, var(--line-2) 82%, transparent);
+}
+
+/* ---- Grids --------------------------------------------------------------- */
+
+.grid {
+    display: grid;
+    gap: var(--gap);
+}
+
+.grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.grid--split {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+}
+
+.grid--sticky-side {
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+}
+
+.sticky-side {
+    position: sticky;
+    inset-block-start: calc(var(--header-h) + 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+@media (max-width: 1080px) {
+    .grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid--sticky-side { grid-template-columns: minmax(0, 1fr); }
+    .sticky-side { position: static; }
+}
+
+@media (max-width: 860px) {
+    .grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid--split { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 620px) {
+    .grid--2,
+    .grid--3,
+    .grid--4 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- Skip link ----------------------------------------------------------- */
+
+.skip-link {
+    position: fixed;
+    inset-block-start: 0.75rem;
+    inset-inline-start: 0.75rem;
+    z-index: 200;
+    padding: 0.7rem 1.1rem;
+    border-radius: var(--r-sm);
+    background: var(--accent);
+    color: var(--ink-1000);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    transform: translateY(-160%);
+    transition: transform var(--t-fast) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+    transform: translateY(0);
+}

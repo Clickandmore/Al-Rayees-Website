@@ -1,0 +1,255 @@
+/* ==========================================================================
+   Division sections — the detail bands for each business
+   ========================================================================== */
+
+.division {
+    position: relative;
+    padding-block: var(--section-y);
+    scroll-margin-block-start: var(--header-h);
+    border-block-start: 1px solid var(--line);
+    /* `clip` rather than `hidden`: it contains the decorative wash below
+       without creating a scroll container, so the sticky sidebar in the
+       Amtech band keeps working. */
+    overflow: clip;
+}
+
+/* A soft accent wash centred over the top edge of each division band.
+   Centring is a physical, symmetric operation, so `left` is used on purpose —
+   pairing a logical inset with a physical translate flips the element out of
+   the page in RTL. */
+.division::before {
+    content: '';
+    position: absolute;
+    inset-block-start: 0;
+    left: 50%;
+    translate: -50% 0;
+    inline-size: min(1100px, 110%);
+    block-size: 520px;
+    background: radial-gradient(50% 60% at 50% 0%, rgba(var(--accent-rgb), 0.14), transparent 72%);
+    pointer-events: none;
+}
+
+.division__inner {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+/* ---- Division header ----------------------------------------------------- */
+
+.division__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(1.75rem, 4vw, 4rem);
+    align-items: end;
+}
+
+.division__id {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.division__index {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+[lang='ar'] .division__index {
+    letter-spacing: 0.04em;
+    text-transform: none;
+    font-weight: 600;
+}
+
+.division__name {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-tight);
+    font-weight: 550;
+}
+
+.division__tagline {
+    font-size: var(--fs-lg);
+    color: var(--fg-2);
+    font-weight: 300;
+}
+
+[lang='ar'] .division__tagline {
+    font-weight: 400;
+}
+
+@media (max-width: 900px) {
+    .division__head {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: start;
+    }
+}
+
+/* ---- Sub-block heading (products, guarantees, …) ------------------------- */
+
+.block {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.block__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding-block-end: 1rem;
+    border-block-end: 1px solid var(--line);
+}
+
+.block__title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    font-size: var(--fs-h3);
+    font-weight: 550;
+}
+
+.block__title::before {
+    content: '';
+    inline-size: 7px;
+    block-size: 7px;
+    rotate: 45deg;
+    background: var(--accent);
+    flex: none;
+    translate: 0 -0.15em;
+}
+
+.block__sub {
+    font-size: var(--fs-sm);
+    color: var(--fg-3);
+    max-inline-size: 52ch;
+}
+
+/* ---- Materials (Amtech) -------------------------------------------------- */
+
+.material {
+    position: relative;
+    padding: clamp(1.5rem, 2.8vw, 2.1rem);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    background: linear-gradient(170deg, var(--glass-3), transparent 70%);
+    overflow: hidden;
+    transition: border-color var(--t-mid), transform var(--t-mid) var(--ease-out);
+}
+
+.material:hover {
+    border-color: rgba(var(--accent-rgb), 0.35);
+    transform: translateY(-4px);
+}
+
+.material__name {
+    font-family: var(--font-latin);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    background: linear-gradient(150deg, #fff, var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-block-end: 0.75rem;
+}
+
+.material__text {
+    font-size: var(--fs-sm);
+    color: var(--fg-3);
+    font-weight: 300;
+}
+
+[lang='ar'] .material__text {
+    font-weight: 400;
+}
+
+/* ---- Coverage map plate -------------------------------------------------- */
+
+.coverage {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(1.75rem, 4vw, 3.5rem);
+    align-items: center;
+    padding: clamp(1.75rem, 3.5vw, 3rem);
+    border-radius: var(--r-xl);
+    border: 1px solid var(--line);
+    background:
+        radial-gradient(70% 120% at 100% 50%, rgba(var(--accent-rgb), 0.1), transparent 62%),
+        rgba(255, 255, 255, 0.022);
+    overflow: hidden;
+}
+
+.coverage__globe {
+    position: relative;
+    aspect-ratio: 1;
+    max-inline-size: 340px;
+    margin-inline: auto;
+    inline-size: 100%;
+}
+
+.coverage__globe svg {
+    inline-size: 100%;
+    block-size: 100%;
+    overflow: visible;
+}
+
+.coverage__globe .globe-grid {
+    stroke: var(--line-2);
+    stroke-width: 0.6;
+}
+
+.coverage__globe .globe-ring {
+    stroke: rgba(var(--accent-rgb), 0.35);
+    stroke-width: 0.8;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: globe-spin 26s linear infinite;
+}
+
+.coverage__globe .globe-pin {
+    fill: var(--accent);
+    animation: pin-blink 3.4s var(--ease-in-out) infinite;
+    animation-delay: calc(var(--i, 0) * 0.45s);
+}
+
+.coverage__globe .globe-pin-halo {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 0.8;
+    opacity: 0;
+    /* fill-box pins the origin to the ring itself; the default view-box
+       would scale it out of the globe's centre instead. */
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pin-halo 3.4s var(--ease-out) infinite;
+    animation-delay: calc(var(--i, 0) * 0.45s);
+}
+
+@keyframes globe-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pin-blink {
+    0%, 100% { opacity: 0.45; }
+    45% { opacity: 1; }
+}
+
+@keyframes pin-halo {
+    0% { opacity: 0.7; scale: 1; }
+    60%, 100% { opacity: 0; scale: 3.2; }
+}
+
+@media (max-width: 860px) {
+    .coverage {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

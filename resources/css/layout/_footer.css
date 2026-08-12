@@ -1,0 +1,185 @@
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer {
+    position: relative;
+    padding-block: clamp(3.5rem, 7vw, 6rem) 2rem;
+    border-block-start: 1px solid var(--line);
+    background:
+        radial-gradient(120% 100% at 50% 0%, rgba(var(--accent-rgb), 0.07), transparent 62%),
+        var(--ink-1000);
+}
+
+.footer__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
+    gap: clamp(2rem, 4vw, 3.5rem);
+    padding-block-end: clamp(2.5rem, 5vw, 4rem);
+}
+
+.footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    max-inline-size: 42ch;
+}
+
+.footer__blurb {
+    color: var(--fg-3);
+    font-size: var(--fs-sm);
+    font-weight: 300;
+}
+
+[lang='ar'] .footer__blurb {
+    font-weight: 400;
+}
+
+.footer__col h3 {
+    font-size: var(--fs-micro);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-4);
+    font-weight: 500;
+    margin-block-end: 1.15rem;
+}
+
+[lang='ar'] .footer__col h3 {
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: var(--fs-sm);
+}
+
+.footer__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.footer__col a {
+    font-size: var(--fs-sm);
+    color: var(--fg-2);
+    transition: color var(--t-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer__col a:hover {
+    color: var(--accent);
+}
+
+.footer__col a svg {
+    inline-size: 13px;
+    block-size: 13px;
+    opacity: 0.55;
+}
+
+.footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    padding-block-start: 1.75rem;
+    border-block-start: 1px solid var(--line);
+    font-size: var(--fs-micro);
+    color: var(--fg-4);
+}
+
+.footer__legal {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+/* Oversized watermark wordmark. */
+.footer__watermark {
+    display: block;
+    inline-size: 100%;
+    margin-block: clamp(1rem, 3vw, 2.5rem) 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 15vw, 13rem);
+    font-weight: 600;
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.075), transparent 78%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    user-select: none;
+    pointer-events: none;
+}
+
+[lang='ar'] .footer__watermark {
+    letter-spacing: 0;
+    line-height: 1.05;
+}
+
+@media (max-width: 900px) {
+    .footer__top {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .footer__brand {
+        grid-column: 1 / -1;
+    }
+}
+
+/* ---- Back to top --------------------------------------------------------- */
+
+.to-top {
+    position: fixed;
+    inset-block-end: clamp(1rem, 3vw, 2rem);
+    inset-inline-end: clamp(1rem, 3vw, 2rem);
+    z-index: 90;
+    inline-size: 48px;
+    block-size: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--glass);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--line-2);
+    color: var(--fg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px) scale(0.9);
+    transition: opacity var(--t-mid) var(--ease-out), transform var(--t-mid) var(--ease-spring),
+        visibility var(--t-mid), border-color var(--t-fast);
+}
+
+.to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+.to-top:hover {
+    border-color: rgba(var(--accent-rgb), 0.6);
+    color: var(--accent);
+}
+
+.to-top svg {
+    inline-size: 17px;
+    block-size: 17px;
+}
+
+.to-top__ring {
+    position: absolute;
+    inset: -1px;
+    rotate: -90deg;
+}
+
+.to-top__ring circle {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: calc(1 - var(--progress, 0));
+    opacity: 0.9;
+}

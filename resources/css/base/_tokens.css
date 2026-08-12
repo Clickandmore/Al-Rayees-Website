@@ -1,0 +1,150 @@
+/* ==========================================================================
+   Design tokens
+   The single source of truth for colour, type, space, motion and elevation.
+   --accent-* is intentionally mutable: each division section repaints it
+   as it scrolls into view (see effects/_ambient.css + js/accent.js).
+   ========================================================================== */
+
+:root {
+    /* ---- Surfaces ------------------------------------------------------- */
+    --ink-1000: #040507;
+    --ink-950: #07080C;
+    --ink-900: #0A0C11;
+    --ink-850: #0E1117;
+    --ink-800: #12161D;
+    --ink-750: #181D26;
+    --ink-700: #202631;
+
+    --line: rgba(255, 255, 255, 0.07);
+    --line-2: rgba(255, 255, 255, 0.12);
+    --line-3: rgba(255, 255, 255, 0.2);
+
+    --glass: rgba(14, 17, 23, 0.62);
+    --glass-2: rgba(255, 255, 255, 0.032);
+    --glass-3: rgba(255, 255, 255, 0.055);
+
+    /* ---- Foreground ----------------------------------------------------- */
+    --fg: #EDF0F5;
+    --fg-2: #AEB7C6;
+    --fg-3: #798395;
+    --fg-4: #4E5768;
+
+    /* ---- Brand ---------------------------------------------------------- */
+    --gold: #D5A63C;
+    --gold-2: #F2D284;
+    --gold-rgb: 213, 166, 60;
+
+    /* ---- Division accents ------------------------------------------------ */
+    --charcoal: #F4842E;
+    --charcoal-2: #FFC08A;
+    --charcoal-rgb: 244, 132, 46;
+
+    --danaroz: #E36A87;
+    --danaroz-2: #F7B3C3;
+    --danaroz-rgb: 227, 106, 135;
+
+    --amtech: #3EC8E8;
+    --amtech-2: #A5EAF8;
+    --amtech-rgb: 62, 200, 232;
+
+    --leadwell: #7A93FF;
+    --leadwell-2: #C0CBFF;
+    --leadwell-rgb: 122, 147, 255;
+
+    /* Live accent — animated between the values above. */
+    --accent: var(--gold);
+    --accent-2: var(--gold-2);
+    --accent-rgb: var(--gold-rgb);
+
+    /* ---- Type ----------------------------------------------------------- */
+    --font-latin: 'Sora', ui-sans-serif, system-ui, sans-serif;
+    --font-arabic: 'IBM Plex Sans Arabic', 'Segoe UI', ui-sans-serif, sans-serif;
+    --font-body: var(--font-latin);
+    --font-display: var(--font-latin);
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+    --fs-eyebrow: clamp(0.7rem, 0.66rem + 0.2vw, 0.78rem);
+    --fs-micro: clamp(0.74rem, 0.7rem + 0.2vw, 0.82rem);
+    --fs-sm: clamp(0.86rem, 0.82rem + 0.2vw, 0.94rem);
+    --fs-base: clamp(0.97rem, 0.93rem + 0.25vw, 1.06rem);
+    --fs-lg: clamp(1.06rem, 1rem + 0.4vw, 1.25rem);
+    --fs-xl: clamp(1.25rem, 1.1rem + 0.7vw, 1.6rem);
+    --fs-h3: clamp(1.35rem, 1.15rem + 0.95vw, 2rem);
+    --fs-h2: clamp(1.85rem, 1.4rem + 2.1vw, 3.35rem);
+    --fs-h1: clamp(2.5rem, 1.5rem + 4.6vw, 5.6rem);
+
+    --lh-tight: 1.06;
+    --lh-snug: 1.24;
+    --lh-body: 1.75;
+
+    /* ---- Space ---------------------------------------------------------- */
+    --gutter: clamp(1.15rem, 4vw, 3.25rem);
+    --container: 1320px;
+    --container-narrow: 980px;
+    --section-y: clamp(4.5rem, 9vw, 9.5rem);
+    --gap: clamp(1rem, 2vw, 1.75rem);
+
+    /* ---- Shape & elevation ---------------------------------------------- */
+    --r-sm: 10px;
+    --r-md: 16px;
+    --r-lg: 24px;
+    --r-xl: 32px;
+    --r-pill: 999px;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 18px 40px -22px rgba(0, 0, 0, 0.85);
+    --shadow-lg: 0 40px 90px -40px rgba(0, 0, 0, 0.95);
+    --shadow-accent: 0 30px 70px -40px rgba(var(--accent-rgb), 0.75);
+
+    /* ---- Motion --------------------------------------------------------- */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --t-fast: 180ms;
+    --t-mid: 380ms;
+    --t-slow: 720ms;
+
+    --header-h: 76px;
+    --scrollbar: 0px;
+}
+
+/* Arabic swaps the type stack; everything else is shared. */
+[lang='ar'] {
+    --font-body: var(--font-arabic);
+    --font-display: var(--font-arabic);
+    --lh-tight: 1.24;
+    --lh-snug: 1.45;
+    --lh-body: 1.95;
+}
+
+/* Per-division accent scopes — applied by js/accent.js to <html>. */
+[data-accent='charcoal'] {
+    --accent: var(--charcoal);
+    --accent-2: var(--charcoal-2);
+    --accent-rgb: var(--charcoal-rgb);
+}
+
+[data-accent='danaroz'] {
+    --accent: var(--danaroz);
+    --accent-2: var(--danaroz-2);
+    --accent-rgb: var(--danaroz-rgb);
+}
+
+[data-accent='amtech'] {
+    --accent: var(--amtech);
+    --accent-2: var(--amtech-2);
+    --accent-rgb: var(--amtech-rgb);
+}
+
+[data-accent='leadwell'] {
+    --accent: var(--leadwell);
+    --accent-2: var(--leadwell-2);
+    --accent-rgb: var(--leadwell-rgb);
+}
+
+/* Local accent override for a single card / block. */
+.u-accent-charcoal { --accent: var(--charcoal); --accent-2: var(--charcoal-2); --accent-rgb: var(--charcoal-rgb); }
+.u-accent-danaroz  { --accent: var(--danaroz);  --accent-2: var(--danaroz-2);  --accent-rgb: var(--danaroz-rgb); }
+.u-accent-amtech   { --accent: var(--amtech);   --accent-2: var(--amtech-2);   --accent-rgb: var(--amtech-rgb); }
+.u-accent-leadwell { --accent: var(--leadwell); --accent-2: var(--leadwell-2); --accent-rgb: var(--leadwell-rgb); }
+.u-accent-gold     { --accent: var(--gold);     --accent-2: var(--gold-2);     --accent-rgb: var(--gold-rgb); }
