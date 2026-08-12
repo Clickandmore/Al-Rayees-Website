@@ -14,6 +14,7 @@ import initPointer from './modules/pointer';
 import initTabs from './modules/tabs';
 import initEmbers from './modules/embers';
 import initToTop from './modules/to-top';
+import initWatermark from './modules/watermark';
 
 const boot = () => {
     initPreloader();
@@ -25,6 +26,7 @@ const boot = () => {
     initTabs();
     initEmbers();
     initToTop();
+    initWatermark();
 };
 
 if (document.readyState === 'loading') {

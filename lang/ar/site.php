@@ -290,8 +290,8 @@ return [
                 'meta' => [
                     ['label' => 'المقر الرئيسي', 'value' => 'عمّان — الدوار السابع — شارع زهران'],
                     ['label' => 'صالة العرض', 'value' => 'عمّان — رأس العين'],
-                    ['label' => 'هواتف', 'value' => '00962782990001 · 00962782990003 · 00962782990029'],
-                    ['label' => 'واتساب', 'value' => '00962787000180 · 00962787000185'],
+                    ['label' => 'هواتف', 'value' => '+962 78 299 0001 · +962 78 299 0003 · +962 78 299 0029'],
+                    ['label' => 'واتساب', 'type' => 'chat', 'value' => '+962 78 700 0180 · +962 78 700 0185'],
                     ['label' => 'البريد الإلكتروني', 'value' => 'charcoal@alrayees.com'],
                 ],
             ],
@@ -304,7 +304,7 @@ return [
                     'سجل تجاري سوري رقم 105548، ورقم الحماية الملكية 10338.',
                 ],
                 'meta' => [
-                    ['label' => 'واتساب', 'value' => '00962787000185'],
+                    ['label' => 'واتساب', 'type' => 'chat', 'value' => '+962 78 700 0185'],
                     ['label' => 'البريد الإلكتروني', 'value' => 'charcoal@alrayees.com'],
                 ],
             ],
@@ -313,8 +313,7 @@ return [
         'factory_title' => 'بيانات التواصل الدولية — المصنع',
         'factory'       => [
             ['label' => 'مكتب الفلبين', 'value' => '+63 961 641 6818'],
-            ['label' => 'واتساب (الأردن)', 'value' => '+962 7 8700 0185'],
-            ['label' => 'واتساب (الأردن 2)', 'value' => '+962 7 8700 0181'],
+            ['label' => 'واتساب (الأردن)', 'type' => 'chat', 'value' => '+962 78 700 0185 · +962 78 700 0181'],
             ['label' => 'البريد الإلكتروني', 'value' => 'AlraiyesCorporation@alrayees.com'],
             ['label' => 'الموقع', 'value' => 'AlraiyesCorporation.com'],
             ['label' => 'موقع المصنع', 'value' => 'دافاو، الفلبين'],
@@ -346,8 +345,8 @@ return [
         'markets_label' => 'الأسواق المستهدفة',
         'markets'       => ['مصر', 'السعودية', 'الجزائر', 'ليبيا'],
         'contact'       => [
-            ['label' => 'واتساب', 'value' => '01094997916'],
-            ['label' => 'فيسبوك', 'value' => 'DANA ROZ'],
+            ['label' => 'واتساب', 'type' => 'chat', 'value' => '+20 109 499 7916', 'href' => 'https://wa.me/201094997916'],
+            ['label' => 'فيسبوك', 'type' => 'social', 'value' => 'DANA ROZ', 'href' => 'https://www.facebook.com/search/top?q=dana%20roz'],
         ],
     ],
 
@@ -428,11 +427,11 @@ return [
         'quote' => 'لنبنِ ابتسامات أفضل، معاً.',
 
         'contact' => [
-            ['label' => 'هاتف', 'value' => '0917-173-0486 · 0956-406-6734'],
+            ['label' => 'هاتف', 'value' => '+63 917 173 0486 · +63 956 406 6734'],
             ['label' => 'مكتب مكاتي', 'value' => 'Unit A, Level 2, 56 B Arnaiz Avenue, Taylor Street, Pio Del Pilar, Makati City'],
             ['label' => 'مكتب لاجونا', 'value' => 'SAS Bldg., Anahaw Homes, Brgy. Dita, Sta. Rosa, Laguna'],
             ['label' => 'البريد الإلكتروني', 'value' => 'amtechdentlab@gmail.com'],
-            ['label' => 'حسابات التواصل', 'value' => '@amtechdentlabph — تيك توك، إنستغرام، فيسبوك'],
+            ['label' => 'حسابات التواصل', 'type' => 'social', 'value' => '@amtechdentlabph', 'href' => 'https://www.instagram.com/amtechdentlabph'],
         ],
     ],
 

@@ -94,28 +94,47 @@
     flex-wrap: wrap;
 }
 
-/* Oversized watermark wordmark. */
+/* Oversized watermark wordmark. Sized against the container, not the viewport,
+   so the gutters are respected. */
+.footer > .container {
+    container-type: inline-size;
+}
+
 .footer__watermark {
     display: block;
     inline-size: 100%;
     margin-block: clamp(1rem, 3vw, 2.5rem) 0;
     font-family: var(--font-display);
-    font-size: clamp(3rem, 15vw, 13rem);
+    /* Auto-fit: --chars comes from the markup, so a longer wordmark simply sets
+       smaller instead of wrapping onto a second line that the fade swallows.
+       --fit is the per-script average glyph advance, tuned by eye. */
+    font-size: min(11rem, calc(var(--fit, 165) * 1cqw / var(--chars, 14)));
     font-weight: 600;
-    line-height: 0.85;
+    line-height: 0.95;
     letter-spacing: -0.05em;
     text-align: center;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.075), transparent 78%);
+    white-space: nowrap;
+    overflow: clip;
+    background: linear-gradient(
+        to bottom,
+        rgba(var(--accent-rgb), 0.62) 0%,
+        rgba(255, 255, 255, 0.2) 55%,
+        rgba(255, 255, 255, 0.07) 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    /* Keeps the faded bottom half of the letterforms legible. */
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.06);
     user-select: none;
     pointer-events: none;
 }
 
 [lang='ar'] .footer__watermark {
+    --fit: 150;
+
     letter-spacing: 0;
-    line-height: 1.05;
+    line-height: 1.15;
 }
 
 @media (max-width: 900px) {

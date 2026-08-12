@@ -65,7 +65,18 @@
             </div>
         </div>
 
-        <p class="footer__watermark" aria-hidden="true">{{ __('site.brand.suffix') }} {{ __('site.brand.name') }}</p>
+        @php
+            // The watermark must stay on a single line in every language, so its
+            // size is derived from the length of the wordmark itself.
+            $watermark = trim(__('site.brand.suffix') . ' ' . __('site.brand.name'));
+        @endphp
+
+        <p
+            class="footer__watermark"
+            style="--chars: {{ mb_strlen($watermark) }}"
+            data-watermark
+            aria-hidden="true"
+        >{{ $watermark }}</p>
 
         <div class="footer__bottom">
             <span>© {{ now()->year }} {{ config('site.company.name') }}. {{ __('site.footer.rights') }}</span>

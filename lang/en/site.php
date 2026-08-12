@@ -290,8 +290,8 @@ return [
                 'meta' => [
                     ['label' => 'Head office', 'value' => 'Amman — 7th Circle — Zahran Street'],
                     ['label' => 'Showroom', 'value' => 'Amman — Ras Al-Ain'],
-                    ['label' => 'Phones', 'value' => '00962782990001 · 00962782990003 · 00962782990029'],
-                    ['label' => 'WhatsApp', 'value' => '00962787000180 · 00962787000185'],
+                    ['label' => 'Phones', 'value' => '+962 78 299 0001 · +962 78 299 0003 · +962 78 299 0029'],
+                    ['label' => 'WhatsApp', 'type' => 'chat', 'value' => '+962 78 700 0180 · +962 78 700 0185'],
                     ['label' => 'Email', 'value' => 'charcoal@alrayees.com'],
                 ],
             ],
@@ -304,7 +304,7 @@ return [
                     'Syrian commercial registry No. 105548, and Royal Protection No. 10338.',
                 ],
                 'meta' => [
-                    ['label' => 'WhatsApp', 'value' => '00962787000185'],
+                    ['label' => 'WhatsApp', 'type' => 'chat', 'value' => '+962 78 700 0185'],
                     ['label' => 'Email', 'value' => 'charcoal@alrayees.com'],
                 ],
             ],
@@ -313,8 +313,7 @@ return [
         'factory_title' => 'International Contact — Factory',
         'factory'       => [
             ['label' => 'Philippines office', 'value' => '+63 961 641 6818'],
-            ['label' => 'WhatsApp (Jordan)', 'value' => '+962 7 8700 0185'],
-            ['label' => 'WhatsApp (Jordan 2)', 'value' => '+962 7 8700 0181'],
+            ['label' => 'WhatsApp (Jordan)', 'type' => 'chat', 'value' => '+962 78 700 0185 · +962 78 700 0181'],
             ['label' => 'Email', 'value' => 'AlraiyesCorporation@alrayees.com'],
             ['label' => 'Website', 'value' => 'AlraiyesCorporation.com'],
             ['label' => 'Factory location', 'value' => 'Davao, Philippines'],
@@ -346,8 +345,8 @@ return [
         'markets_label' => 'Target markets',
         'markets'       => ['Egypt', 'Saudi Arabia', 'Algeria', 'Libya'],
         'contact'       => [
-            ['label' => 'WhatsApp', 'value' => '01094997916'],
-            ['label' => 'Facebook', 'value' => 'DANA ROZ'],
+            ['label' => 'WhatsApp', 'type' => 'chat', 'value' => '+20 109 499 7916', 'href' => 'https://wa.me/201094997916'],
+            ['label' => 'Facebook', 'type' => 'social', 'value' => 'DANA ROZ', 'href' => 'https://www.facebook.com/search/top?q=dana%20roz'],
         ],
     ],
 
@@ -428,11 +427,11 @@ return [
         'quote' => 'Let\'s build better smiles, together.',
 
         'contact' => [
-            ['label' => 'Phone', 'value' => '0917-173-0486 · 0956-406-6734'],
+            ['label' => 'Phone', 'value' => '+63 917 173 0486 · +63 956 406 6734'],
             ['label' => 'Makati office', 'value' => 'Unit A, Level 2, 56 B Arnaiz Avenue, Taylor Street, Pio Del Pilar, Makati City'],
             ['label' => 'Laguna office', 'value' => 'SAS Bldg., Anahaw Homes, Brgy. Dita, Sta. Rosa, Laguna'],
             ['label' => 'Email', 'value' => 'amtechdentlab@gmail.com'],
-            ['label' => 'Social', 'value' => '@amtechdentlabph — TikTok, Instagram, Facebook'],
+            ['label' => 'Social', 'type' => 'social', 'value' => '@amtechdentlabph', 'href' => 'https://www.instagram.com/amtechdentlabph'],
         ],
     ],
 
