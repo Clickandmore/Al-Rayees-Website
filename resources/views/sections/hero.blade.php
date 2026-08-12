@@ -1,4 +1,17 @@
 <section class="hero" id="home">
+    {{-- Group collage: tinted, dimmed and faded into the page by CSS. --}}
+    <div class="hero__media" aria-hidden="true">
+        <img
+            class="hero__img"
+            src="{{ asset('assets/images/hero.jpeg') }}"
+            alt=""
+            width="1408"
+            height="768"
+            fetchpriority="high"
+            decoding="async"
+        >
+    </div>
+
     <canvas class="hero__canvas" data-embers aria-hidden="true"></canvas>
 
     <div class="container hero__inner">

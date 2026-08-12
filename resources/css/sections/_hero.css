@@ -12,6 +12,54 @@
     isolation: isolate;
 }
 
+/* ---- Photo backdrop ------------------------------------------------------
+   The collage sits at the very back of the hero's stacking context. It is
+   desaturated and dimmed toward the ink palette, washed with the live accent,
+   then masked so its edges dissolve instead of ending on a hard seam. */
+
+.hero__media {
+    --photo-opacity: 0.78;
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hero__img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: 50% 42%;
+    filter: grayscale(0.16) saturate(0.94) contrast(1.04) brightness(0.8);
+    opacity: 0;
+    transform: scale(1.08);
+    animation:
+        hero-photo-in 2s var(--ease-out) 0.15s forwards,
+        hero-photo-drift 34s var(--ease-in-out) 2s infinite alternate;
+    -webkit-mask-image: radial-gradient(130% 105% at 50% 32%, #000 50%, rgba(0, 0, 0, 0.62) 76%, transparent 100%);
+    mask-image: radial-gradient(130% 105% at 50% 32%, #000 50%, rgba(0, 0, 0, 0.62) 76%, transparent 100%);
+}
+
+@keyframes hero-photo-in {
+    to { opacity: var(--photo-opacity); }
+}
+
+@keyframes hero-photo-drift {
+    to { transform: scale(1.16) translate3d(-1.5%, -1.5%, 0); }
+}
+
+/* Accent wash + ink gradient that ties the photo to the palette. */
+.hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(70% 55% at 50% 34%, rgba(var(--accent-rgb), 0.13), transparent 72%),
+        linear-gradient(180deg, rgba(4, 5, 7, 0.6), rgba(4, 5, 7, 0.1) 40%, rgba(4, 5, 7, 0.62) 76%, var(--ink-1000));
+    transition: background 1.2s var(--ease-out);
+}
+
 /* Ember particle field. */
 .hero__canvas {
     position: absolute;
@@ -229,5 +277,23 @@
         min-block-size: auto;
         padding-block-start: calc(var(--header-h) + 4rem);
         padding-block-end: 4rem;
+    }
+
+    /* Taller, denser copy on phones — hold the photo back so it stays a mood
+       layer rather than competing with the headline. */
+    .hero__media {
+        --photo-opacity: 0.52;
+    }
+
+    .hero__img {
+        object-position: 50% 32%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero__img {
+        opacity: var(--photo-opacity);
+        transform: scale(1.04);
+        animation: none;
     }
 }
