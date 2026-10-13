@@ -1,297 +1,229 @@
 /* ==========================================================================
-   Lists — checklists, definition rows, chip grids
+   Lists — checklist, inline list, bullets, definition list, meta list, quote
    ========================================================================== */
 
-/* ---- Checklist ----------------------------------------------------------- */
+/* ---- Checklist: small gold tick + text ---------------------------------- */
 
 .checklist {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    gap: 12px;
 }
+
+.checklist--cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+.checklist--cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 32px; }
 
 .checklist__item {
     display: flex;
     align-items: flex-start;
-    gap: 0.9rem;
-    padding-block: 0.95rem;
-    border-block-end: 1px solid var(--line);
-    font-size: var(--fs-sm);
-    color: var(--fg-2);
-    transition: color var(--t-fast), padding-inline-start var(--t-mid) var(--ease-out);
-}
-
-.checklist__item:last-child {
-    border-block-end: 0;
-}
-
-.checklist__item:hover {
-    color: var(--fg);
-    padding-inline-start: 0.4rem;
+    gap: 12px;
 }
 
 .checklist__mark {
-    display: grid;
-    place-items: center;
-    inline-size: 20px;
-    block-size: 20px;
-    flex: none;
-    margin-block-start: 0.22em;
-    border-radius: 50%;
-    border: 1px solid rgba(var(--accent-rgb), 0.4);
-    color: var(--accent);
-    transition: background var(--t-mid), transform var(--t-mid) var(--ease-spring);
+    width: 18px;
+    height: 18px;
+    margin-top: .4em;
+    color: var(--gold);
+    stroke-width: 2;
 }
 
-.checklist__mark svg {
-    inline-size: 10px;
-    block-size: 10px;
+.checklist--sm {
+    gap: 8px;
+    font-size: var(--fs-sm);
 }
 
-.checklist__item:hover .checklist__mark {
-    background: rgba(var(--accent-rgb), 0.18);
-    transform: scale(1.1);
+.checklist--sm .checklist__mark {
+    width: 16px;
+    height: 16px;
 }
 
-/* ---- Bullet list (division points) --------------------------------------- */
+.prose .checklist {
+    margin-top: 24px;
+}
 
-.bullets {
+@media (max-width: 1023px) {
+    .checklist--cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 767px) {
+    .checklist--cols-2,
+    .checklist--cols-3 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* ---- Inline list: names separated by thin rules ------------------------- */
+
+.inline-list {
     display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    color: var(--navy);
 }
+
+.inline-list li {
+    padding-inline: 16px;
+    border-inline-start: 1px solid var(--border);
+    line-height: 1.4;
+}
+
+.inline-list li:first-child {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+}
+
+.inline-list--lg {
+    font-size: var(--fs-md);
+    font-weight: 700;
+    row-gap: 12px;
+}
+
+.markets-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+}
+
+.markets-row > .icon {
+    width: 24px;
+    height: 24px;
+    color: var(--navy);
+}
+
+/* ---- Bullets ------------------------------------------------------------ */
 
 .bullets li {
     position: relative;
-    padding-inline-start: 1.4rem;
-    font-size: var(--fs-sm);
-    color: var(--fg-2);
-    font-weight: 300;
+    padding-inline-start: 20px;
 }
 
-[lang='ar'] .bullets li {
-    font-weight: 400;
+.bullets li + li {
+    margin-top: 12px;
 }
 
 .bullets li::before {
-    content: '';
+    content: "";
     position: absolute;
     inset-inline-start: 0;
-    inset-block-start: 0.72em;
-    inline-size: 5px;
-    block-size: 5px;
-    rotate: 45deg;
-    background: var(--accent);
+    top: .8em;
+    width: 6px;
+    height: 6px;
+    background: var(--navy);
 }
 
-/* ---- Definition rows (contact / meta) ------------------------------------ */
+/* ---- Definition list: title + text rows under thin rules ---------------- */
 
-.meta-list {
-    display: flex;
-    flex-direction: column;
+.def-list__row {
+    padding-block: 20px;
+    border-top: 1px solid var(--border);
 }
+
+.def-list__row:last-child {
+    border-bottom: 1px solid var(--border);
+}
+
+.def-list dt {
+    color: var(--navy);
+}
+
+.def-list dd {
+    margin-top: 4px;
+    color: var(--muted);
+}
+
+/* ---- Meta list: label / value rows (contact details) -------------------- */
 
 .meta-row {
     display: grid;
-    grid-template-columns: minmax(112px, 0.34fr) minmax(0, 1fr);
-    gap: 0.35rem 1.4rem;
-    padding-block: 0.85rem;
-    border-block-end: 1px dashed var(--line);
-    font-size: var(--fs-sm);
+    grid-template-columns: minmax(140px, 200px) minmax(0, 1fr);
+    gap: 4px 24px;
+    padding-block: 16px;
 }
 
-.meta-row:last-child {
-    border-block-end: 0;
+.meta-row + .meta-row {
+    border-top: 1px solid var(--border);
 }
 
 .meta-row__label {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    min-block-size: 1.7em;
-    color: var(--fg-4);
-    font-size: var(--fs-micro);
-    line-height: 1.7;
+    gap: 10px;
+    align-self: start;
+    color: var(--muted);
+    font-size: var(--fs-sm);
+    font-weight: 400;
+    line-height: 1.8;
 }
 
 .meta-row__icon {
-    inline-size: 14px;
-    block-size: 14px;
-    flex: none;
-    color: var(--fg-4);
-    opacity: 0.75;
-    transition: color var(--t-mid), opacity var(--t-mid);
+    width: 18px;
+    height: 18px;
+    color: var(--navy);
 }
 
-.meta-row:hover .meta-row__icon {
-    color: var(--accent);
-    opacity: 1;
-}
-
-/* One entry per line: several phone numbers stack into a column instead of
-   wrapping mid-run, which is what made them look scattered. */
 .meta-row__values {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.3rem;
-    color: var(--fg-2);
-}
-
-.meta-value {
-    position: relative;
-    display: inline-flex;
-    max-inline-size: 100%;
-    line-height: 1.7;
-    color: inherit;
+    gap: 2px;
+    color: var(--navy);
     overflow-wrap: anywhere;
-    transition: color var(--t-mid);
 }
 
-/* Digits get the Latin face and fixed-width figures so stacked numbers line
-   up column-for-column. */
+a.meta-value:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-underline-offset: 4px;
+}
+
+/* Keep numbers on one line; the column stacks multiple values instead. */
 .meta-value--num {
-    font-family: var(--font-latin);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.02em;
-}
-
-.meta-value--num .ltr {
-    overflow-wrap: normal;
     white-space: nowrap;
 }
 
-a.meta-value::after {
-    content: '';
-    position: absolute;
-    inset-inline: 0;
-    inset-block-end: -1px;
-    block-size: 1px;
-    background: rgba(var(--accent-rgb), 0.55);
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform var(--t-mid) var(--ease-out);
+/* Stack label over value whenever the list itself is narrow
+   (half-width columns, phones), not just on small viewports. */
+.meta-list {
+    container-type: inline-size;
 }
 
-a.meta-value:hover,
-a.meta-value:focus-visible {
-    color: var(--fg);
-}
-
-a.meta-value:hover::after,
-a.meta-value:focus-visible::after {
-    transform: scaleX(1);
-}
-
-@media (max-width: 520px) {
+@container (max-width: 520px) {
     .meta-row {
         grid-template-columns: minmax(0, 1fr);
-        gap: 0.35rem;
-        padding-block: 0.95rem;
-    }
-
-    .meta-row__label {
-        min-block-size: 0;
     }
 }
 
-/* ---- Chip grid (services, values) ---------------------------------------- */
+/* ---- Quote -------------------------------------------------------------- */
 
-.chip-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
-    gap: 0.75rem;
+.quote {
+    padding-inline-start: 24px;
+    border-inline-start: 3px solid var(--gold);
 }
 
-.chip {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.9rem 1.1rem;
-    border-radius: var(--r-md);
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.022);
+.prose .quote {
+    margin-top: 32px;
+}
+
+.quote p {
+    color: var(--navy);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+.quote footer {
+    margin-top: 8px;
+    color: var(--muted);
     font-size: var(--fs-sm);
-    color: var(--fg-2);
-    overflow: hidden;
-    transition: border-color var(--t-mid), color var(--t-mid), transform var(--t-mid) var(--ease-out);
 }
 
-.chip::before {
-    content: '';
-    position: absolute;
-    inset-block: 0;
-    inset-inline-start: 0;
-    inline-size: 2px;
-    background: var(--accent);
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform var(--t-mid) var(--ease-out);
+.quote--accent {
+    margin-block: 32px;
+    border-inline-start-color: var(--accent);
 }
 
-.chip:hover {
-    border-color: var(--line-2);
-    color: var(--fg);
-    transform: translateY(-2px);
-}
-
-.chip:hover::before {
-    transform: scaleY(1);
-}
-
-.chip__num {
-    font-family: var(--font-latin);
-    font-size: 0.7rem;
-    color: var(--fg-4);
-    font-variant-numeric: tabular-nums;
-    flex: none;
-    transition: color var(--t-mid);
-}
-
-.chip:hover .chip__num {
+.checklist__mark {
     color: var(--accent);
-}
-
-/* ---- Value list (numbered, large) ---------------------------------------- */
-
-/* Separators come from each item's own outline rather than a container
-   background showing through the gaps — otherwise a partly filled last row
-   leaves a bare grey block where the missing cells are. */
-.value-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
-    gap: 1px;
-    border-radius: var(--r-md);
-    overflow: hidden;
-}
-
-.value-list li {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    padding: 1.1rem 1.25rem;
-    background: rgba(255, 255, 255, 0.022);
-    box-shadow: 0 0 0 1px var(--line);
-    font-size: var(--fs-sm);
-    color: var(--fg-2);
-    transition: background var(--t-mid), color var(--t-mid);
-}
-
-.value-list li:hover {
-    background: rgba(var(--accent-rgb), 0.07);
-    color: var(--fg);
-}
-
-.value-list li::before {
-    content: '';
-    inline-size: 6px;
-    block-size: 6px;
-    flex: none;
-    border-radius: 50%;
-    border: 1.5px solid var(--accent);
-    transition: background var(--t-mid);
-}
-
-.value-list li:hover::before {
-    background: var(--accent);
 }

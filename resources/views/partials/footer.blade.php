@@ -1,47 +1,50 @@
-@php
-    $navSections = collect(config('site.sections'))->where('nav', true);
-    $divisions = collect(config('site.sections'))->whereNotNull('accent');
-@endphp
-
 <footer class="footer">
     <div class="container">
         <div class="footer__top">
             <div class="footer__brand">
-                <a class="brand" href="#main">
-                    <span class="brand__mark"><x-logo :animated="false" /></span>
-                    <span class="brand__text">
-                        <span class="brand__name">{{ __('site.brand.name') }}</span>
-                        <span class="brand__suffix">{{ __('site.brand.suffix') }}</span>
-                    </span>
+                <a href="{{ route("{$locale}.home") }}">
+                    <x-logo variant="gold" class="footer__logo" />
                 </a>
-
                 <p class="footer__blurb">{{ __('site.footer.blurb') }}</p>
-
-                <div class="pill-row">
-                    <span class="pill pill--accent"><span class="pill__dot"></span>{{ __('site.brand.tagline') }}</span>
-                </div>
             </div>
 
             <div class="footer__col">
-                <h3>{{ __('site.footer.nav_title') }}</h3>
+                <h2 class="footer__title">{{ __('site.footer.nav_title') }}</h2>
                 <ul>
-                    @foreach ($navSections as $section)
-                        <li><a href="#{{ $section['id'] }}">{{ __($section['label']) }}</a></li>
+                    @foreach (['home', 'about', 'contact'] as $key)
+                        <li><a href="{{ route("{$locale}.{$key}") }}">{{ __(config("site.pages.{$key}.label")) }}</a></li>
                     @endforeach
                 </ul>
             </div>
 
             <div class="footer__col">
-                <h3>{{ __('site.footer.div_title') }}</h3>
-                <ul>
-                    @foreach ($divisions as $section)
-                        <li><a href="#{{ $section['id'] }}">{{ __($section['label']) }}</a></li>
+                <h2 class="footer__title">{{ __('site.footer.div_title') }}</h2>
+                <ul class="footer__divisions">
+                    @foreach (config('site.divisions') as $key => $division)
+                        <li class="theme-{{ $key }}">
+                            <a class="footer__division" href="{{ route("{$locale}.{$key}") }}">
+                                <span class="footer__division-icon"><x-icon :name="$division['icon']" /></span>
+                                {{ __(config("site.pages.{$key}.label")) }}
+                            </a>
+
+                            @php $subs = collect(config('site.pages'))->where('parent', $key); @endphp
+                            @if ($subs->isNotEmpty())
+                                <div class="footer__chips">
+                                    @foreach ($subs as $sub => $profile)
+                                        <a class="footer__chip" href="{{ route("{$locale}.{$sub}") }}">
+                                            <x-icon name="file" />
+                                            {{ __($profile['short']) }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </li>
                     @endforeach
                 </ul>
             </div>
 
             <div class="footer__col">
-                <h3>{{ __('site.footer.reach') }}</h3>
+                <h2 class="footer__title">{{ __('site.footer.reach') }}</h2>
                 <ul>
                     <li>
                         <a href="mailto:charcoal@alrayees.com">
@@ -65,25 +68,9 @@
             </div>
         </div>
 
-        @php
-            // The watermark must stay on a single line in every language, so its
-            // size is derived from the length of the wordmark itself.
-            $watermark = trim(__('site.brand.suffix') . ' ' . __('site.brand.name'));
-        @endphp
-
-        <p
-            class="footer__watermark"
-            style="--chars: {{ mb_strlen($watermark) }}"
-            data-watermark
-            aria-hidden="true"
-        >{{ $watermark }}</p>
-
         <div class="footer__bottom">
-            <span>© {{ now()->year }} {{ config('site.company.name') }}. {{ __('site.footer.rights') }}</span>
-
-            <span class="footer__legal">
-                <span>{{ __('site.coverage.text') }}</span>
-            </span>
+            <span>© {{ now()->year }} {{ $groupName }}. {{ __('site.footer.rights') }}</span>
+            <span>{{ __('site.coverage.text') }}</span>
         </div>
     </div>
 </footer>

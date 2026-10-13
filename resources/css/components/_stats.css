@@ -1,84 +1,80 @@
 /* ==========================================================================
-   Stats — animated counters
+   Key figures — a row of large navy numbers split by thin rules, no cards
    ========================================================================== */
 
 .stats {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: var(--r-lg);
-    overflow: hidden;
+    row-gap: 32px;
 }
 
 .stat {
-    position: relative;
     display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    padding: clamp(1.15rem, 2.4vw, 1.85rem);
-    background: rgba(10, 12, 17, 0.72);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: background var(--t-mid);
+    flex-direction: column-reverse; /* value above label; dt stays first in source */
+    gap: 4px;
+    padding-inline: 32px;
+    border-inline-start: 1px solid var(--border);
 }
 
-.stat::before {
-    content: '';
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline: 0;
-    block-size: 2px;
-    background: linear-gradient(to right, transparent, var(--accent), transparent);
-    opacity: 0;
-    transition: opacity var(--t-mid);
-}
-
-.stat:hover {
-    background: rgba(255, 255, 255, 0.035);
-}
-
-.stat:hover::before {
-    opacity: 0.85;
+.stat:first-child {
+    padding-inline-start: 0;
+    border-inline-start: 0;
 }
 
 .stat__value {
-    display: flex;
-    align-items: baseline;
-    font-family: var(--font-latin);
-    font-size: clamp(1.9rem, 3.6vw, 2.85rem);
-    font-weight: 300;
-    line-height: 1;
-    letter-spacing: -0.045em;
-    font-variant-numeric: tabular-nums;
-    background: linear-gradient(160deg, #fff, var(--accent));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--navy);
+    font-size: var(--fs-xl);
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 .stat__label {
-    font-size: var(--fs-micro);
-    color: var(--fg-3);
-    line-height: 1.45;
+    color: var(--muted);
+    font-size: var(--fs-sm);
+    font-weight: 400;
 }
 
-/* Inline variant used inside division sections. */
-.stats--inline {
-    border: 0;
-    background: none;
-    gap: var(--gap);
-}
-
-.stats--inline .stat {
-    border: 1px solid var(--line);
-    border-radius: var(--r-md);
-    background: rgba(255, 255, 255, 0.025);
-}
-
-@media (max-width: 860px) {
+@media (max-width: 767px) {
     .stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stat {
+        padding-inline: 20px;
+    }
+
+    .stat:nth-child(odd) {
+        padding-inline-start: 0;
+        border-inline-start: 0;
+    }
+}
+
+/* On navy / ink bands: white figures, accent tick above each. */
+.stats--on-dark .stat {
+    position: relative;
+    border-color: rgba(255, 255, 255, .14);
+}
+
+.stats--on-dark .stat__value {
+    color: var(--bg);
+    font-size: 48px;
+}
+
+.stats--on-dark .stat__label {
+    color: var(--on-ink, var(--on-navy));
+}
+
+.stats--on-dark .stat__value::before {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 3px;
+    margin-bottom: 16px;
+    background: var(--accent-on-dark);
+}
+
+@media (max-width: 767px) {
+    .stats--on-dark .stat__value {
+        font-size: 36px;
     }
 }

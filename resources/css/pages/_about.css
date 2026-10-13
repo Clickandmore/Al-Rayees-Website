@@ -1,0 +1,123 @@
+/* ==========================================================================
+   About
+   ========================================================================== */
+
+/* Photo with a navy figure badge overlapping its corner. */
+.framed {
+    position: relative;
+}
+
+.framed .media {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.framed__badge {
+    position: absolute;
+    inset-inline-start: -24px;
+    bottom: -32px;
+    display: grid;
+    gap: 2px;
+    padding: 20px 28px;
+    background: var(--navy);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    color: var(--on-navy);
+    font-size: var(--fs-sm);
+}
+
+.framed__badge-value {
+    color: var(--bg);
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+@media (max-width: 767px) {
+    .framed__badge {
+        inset-inline-start: 12px;
+    }
+}
+
+/* ---- Pull quote --------------------------------------------------------- */
+
+.pull-quote figure {
+    max-width: 900px;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.pull-quote__icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 24px;
+    color: var(--gold);
+}
+
+.pull-quote blockquote p {
+    color: var(--navy);
+    font-size: clamp(28px, 4.4vw, 48px);
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.pull-quote figcaption {
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 18px;
+}
+
+/* ---- Vision / mission: two full-bleed panels ---------------------------- */
+
+.duo {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.duo__panel {
+    padding: 96px max(var(--gutter), 7vw);
+}
+
+.duo__panel p {
+    max-width: 52ch;
+    font-size: 18px;
+}
+
+.duo__panel--navy {
+    background: var(--navy);
+    color: var(--on-navy);
+}
+
+.duo__panel--navy .duo__title {
+    color: var(--bg);
+}
+
+.duo__panel--light {
+    background: var(--accent-soft);
+}
+
+.duo__icon {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 28px;
+    color: var(--gold);
+}
+
+.duo__panel--light .duo__icon {
+    color: var(--navy);
+}
+
+.duo__title {
+    margin-bottom: 16px;
+    font-size: var(--fs-xl);
+}
+
+@media (max-width: 767px) {
+    .duo {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .duo__panel {
+        padding-block: 64px;
+    }
+}

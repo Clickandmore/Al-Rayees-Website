@@ -1,32 +1,38 @@
 /**
  * Al Rayees Group — front-end entry point
  *
- * The site is a static single page, so there is no data layer here: every
- * module is a self-contained progressive enhancement over server-rendered
- * markup. If JavaScript never runs, the page still reads correctly.
+ * Every page is server-rendered; each module is a progressive enhancement.
+ * Scroll animations come from AOS ([data-aos] attributes in the views);
+ * reduced-motion users get the content without movement.
  */
-import initPreloader from './modules/preloader';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import initHeader from './modules/header';
-import initReveal from './modules/reveal';
-import initAccent from './modules/accent';
-import initCounters from './modules/counters';
-import initPointer from './modules/pointer';
 import initTabs from './modules/tabs';
-import initEmbers from './modules/embers';
+import initCounters from './modules/counters';
+import initCompare from './modules/compare';
 import initToTop from './modules/to-top';
-import initWatermark from './modules/watermark';
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const boot = () => {
-    initPreloader();
     initHeader();
-    initReveal();
-    initAccent();
-    initCounters();
-    initPointer();
     initTabs();
-    initEmbers();
-    initToTop();
-    initWatermark();
+    initCounters(reducedMotion);
+    initCompare(reducedMotion);
+    initToTop(reducedMotion);
+
+    AOS.init({
+        duration: 800,
+        easing: 'ease-out-cubic',
+        offset: 60,
+        once: true,
+        disable: reducedMotion,
+    });
+
+    // Layout shifts once web fonts and images land; re-measure trigger points.
+    window.addEventListener('load', () => AOS.refresh());
 };
 
 if (document.readyState === 'loading') {

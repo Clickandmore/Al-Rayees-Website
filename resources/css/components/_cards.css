@@ -1,341 +1,188 @@
 /* ==========================================================================
-   Cards
-   The base .card carries two effects driven from JS (js/pointer.js):
-     --mx / --my  → a cursor-following highlight
-     --rx / --ry  → an optional 3-D tilt (opt in with .card--tilt)
+   Cards — white, 1px border, no shadow at rest
    ========================================================================== */
 
 .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    padding: clamp(1.35rem, 2.4vw, 2rem);
-    border-radius: var(--r-lg);
-    background: linear-gradient(168deg, var(--glass-3), rgba(255, 255, 255, 0.014));
-    border: 1px solid var(--line);
-    overflow: hidden;
-    isolation: isolate;
-    transition: border-color var(--t-mid) var(--ease-out), transform var(--t-mid) var(--ease-out),
-        background var(--t-mid);
-}
-
-/* Cursor-following highlight. */
-.card::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    background: radial-gradient(
-        320px circle at var(--mx, 50%) var(--my, 0%),
-        rgba(var(--accent-rgb), 0.16),
-        transparent 62%
-    );
-    opacity: 0;
-    transition: opacity var(--t-mid) var(--ease-out);
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* Accent hairline that grows along the top edge. */
-.card::after {
-    content: '';
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline: 12%;
-    block-size: 1px;
-    background: linear-gradient(to right, transparent, var(--accent), transparent);
-    opacity: 0;
-    transform: scaleX(0.4);
-    transition: opacity var(--t-mid) var(--ease-out), transform var(--t-slow) var(--ease-out);
-}
-
-.card:hover {
-    border-color: var(--line-2);
-    transform: translateY(-4px);
-}
-
-.card:hover::before,
-.card:hover::after {
-    opacity: 1;
-}
-
-.card:hover::after {
-    transform: scaleX(1);
+    padding: 32px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
 
 .card__title {
-    font-size: var(--fs-xl);
-    font-weight: 550;
-    line-height: var(--lh-snug);
+    font-size: var(--fs-md);
+    margin-bottom: 8px;
 }
 
 .card__text {
-    color: var(--fg-3);
-    font-size: var(--fs-sm);
-    font-weight: 300;
+    color: var(--muted);
 }
 
-[lang='ar'] .card__text {
-    font-weight: 400;
+/* ---- Feature: icon + title + text --------------------------------------- */
+
+.feature__icon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 20px;
+    color: var(--navy);
 }
 
-.card__index {
-    font-family: var(--font-latin);
-    font-size: var(--fs-micro);
-    letter-spacing: 0.2em;
-    color: var(--fg-4);
-    transition: color var(--t-mid);
+/* Unboxed variant: a column item under a thin top rule. */
+.feature--plain {
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
 }
 
-.card:hover .card__index {
-    color: var(--accent);
+.feature > .checklist {
+    margin-top: 20px;
 }
 
-.card--tilt {
-    transform-style: preserve-3d;
-    transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(0);
-    will-change: transform;
-}
-
-.card--tilt:hover {
-    transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px);
-}
-
-.card--flat:hover {
-    transform: none;
-}
-
-/* ---- Division card ------------------------------------------------------- */
-
-.division-card {
-    --pad: clamp(1.5rem, 2.6vw, 2.25rem);
-    min-block-size: clamp(260px, 30vw, 330px);
-    justify-content: space-between;
-    padding: var(--pad);
-    gap: 1.5rem;
-    text-decoration: none;
-}
-
-.division-card__glow {
-    position: absolute;
-    inset-block-start: -45%;
-    inset-inline-end: -25%;
-    inline-size: 70%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(var(--accent-rgb), 0.5), transparent 66%);
-    filter: blur(46px);
-    opacity: 0.42;
-    transition: opacity var(--t-slow) var(--ease-out), transform var(--t-slow) var(--ease-out);
-    pointer-events: none;
-    z-index: -1;
-}
-
-.division-card:hover .division-card__glow {
-    opacity: 0.95;
-    transform: scale(1.16);
-}
-
-.division-card__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.division-card__body {
+/* Charcoal products — the premium grade is marked by a navy frame. */
+.product {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
 }
 
-.division-card__cta {
+.product > .checklist {
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.product--featured {
+    border-color: var(--navy);
+}
+
+/* ---- Contact cards (contact page) and blocks (division pages) ----------- */
+
+.contact-card__head {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.contact-card__head .card__title {
+    margin-bottom: 4px;
+}
+
+.contact-card__place {
     display: inline-flex;
     align-items: center;
-    gap: 0.55rem;
-    font-size: var(--fs-micro);
-    font-weight: 600;
-    color: var(--accent);
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity var(--t-mid) var(--ease-out), transform var(--t-mid) var(--ease-out);
-}
-
-.division-card:hover .division-card__cta,
-.division-card:focus-visible .division-card__cta {
-    opacity: 1;
-    transform: none;
-}
-
-.division-card__cta svg {
-    inline-size: 14px;
-    block-size: 14px;
-}
-
-[dir='rtl'] .division-card__cta svg {
-    scale: -1 1;
-}
-
-/* ---- Icon chip ----------------------------------------------------------- */
-
-.icon-chip {
-    display: grid;
-    place-items: center;
-    inline-size: 46px;
-    block-size: 46px;
-    flex: none;
-    border-radius: 14px;
-    border: 1px solid rgba(var(--accent-rgb), 0.28);
-    background: rgba(var(--accent-rgb), 0.1);
-    color: var(--accent);
-    transition: background var(--t-mid), border-color var(--t-mid), transform var(--t-mid) var(--ease-spring);
-}
-
-.icon-chip svg {
-    inline-size: 21px;
-    block-size: 21px;
-}
-
-.card:hover .icon-chip,
-.division-card:hover .icon-chip {
-    background: rgba(var(--accent-rgb), 0.2);
-    border-color: rgba(var(--accent-rgb), 0.5);
-    transform: scale(1.06) rotate(-4deg);
-}
-
-.icon-chip--sm {
-    inline-size: 36px;
-    block-size: 36px;
-    border-radius: 11px;
-}
-
-.icon-chip--sm svg {
-    inline-size: 17px;
-    block-size: 17px;
-}
-
-/* ---- Product card (charcoal) --------------------------------------------- */
-
-.product-card {
-    gap: 1.15rem;
-    padding-block: clamp(1.6rem, 2.6vw, 2.25rem);
-}
-
-.product-card__num {
-    font-family: var(--font-latin);
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    font-weight: 200;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--line-3);
-    transition: -webkit-text-stroke-color var(--t-mid);
-}
-
-.product-card:hover .product-card__num {
-    -webkit-text-stroke-color: rgba(var(--accent-rgb), 0.8);
-}
-
-.product-card--featured {
-    border-color: rgba(var(--accent-rgb), 0.3);
-    background: linear-gradient(168deg, rgba(var(--accent-rgb), 0.1), rgba(255, 255, 255, 0.015));
-}
-
-.product-card--featured::after {
-    opacity: 1;
-    transform: scaleX(1);
-}
-
-.product-card__specs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-block-start: auto;
-    padding-block-start: 0.35rem;
-}
-
-.spec {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--fg-2);
-    padding: 0.3rem 0.65rem;
-    border-radius: var(--r-sm);
-    background: rgba(255, 255, 255, 0.045);
-    border: 1px solid var(--line);
-}
-
-.spec svg {
-    inline-size: 11px;
-    block-size: 11px;
-    color: var(--accent);
-}
-
-/* ---- Quote card ---------------------------------------------------------- */
-
-.quote {
-    position: relative;
-    padding: clamp(1.75rem, 3.5vw, 2.75rem);
-    padding-inline-start: clamp(2.25rem, 4vw, 3.25rem);
-    border-radius: var(--r-lg);
-    border: 1px solid var(--line);
-    background: linear-gradient(150deg, rgba(var(--accent-rgb), 0.08), transparent 65%);
-    overflow: hidden;
-}
-
-.quote::before {
-    content: '';
-    position: absolute;
-    inset-block: 1.4rem;
-    inset-inline-start: clamp(1rem, 1.8vw, 1.4rem);
-    inline-size: 2px;
-    border-radius: 2px;
-    background: linear-gradient(to bottom, var(--accent), transparent);
-}
-
-.quote__text {
-    font-family: var(--font-display);
-    font-size: var(--fs-h3);
-    font-weight: 500;
-    line-height: var(--lh-snug);
-    letter-spacing: -0.02em;
-}
-
-[lang='ar'] .quote__text {
-    letter-spacing: 0;
-}
-
-.quote__source {
-    margin-block-start: 0.85rem;
+    gap: 6px;
+    color: var(--muted);
     font-size: var(--fs-sm);
-    color: var(--fg-3);
 }
 
-/* ---- Panel (framed content block) ---------------------------------------- */
-
-.panel {
-    position: relative;
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-    border-radius: var(--r-lg);
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.022);
+.contact-card__place .icon {
+    width: 16px;
+    height: 16px;
 }
 
-.panel--accent {
-    border-color: rgba(var(--accent-rgb), 0.22);
-    background: linear-gradient(160deg, rgba(var(--accent-rgb), 0.075), rgba(255, 255, 255, 0.012));
+.contact-card__rows li + li {
+    margin-top: 8px;
 }
 
-.panel__head {
+.contact-row {
     display: flex;
     align-items: center;
-    gap: 0.85rem;
-    margin-block-end: 1.25rem;
+    gap: 12px;
+    color: var(--text);
+    overflow-wrap: anywhere;
 }
 
-.panel__title {
-    font-size: var(--fs-lg);
-    font-weight: 600;
+.contact-row .icon {
+    width: 18px;
+    height: 18px;
+    color: var(--navy);
+}
+
+.contact-row:hover {
+    color: var(--navy);
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-underline-offset: 4px;
+}
+
+.contact-block {
+    padding: 8px 32px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.contact-block__title {
+    padding-top: 20px;
+    font-size: var(--fs-md);
+}
+
+.contact-block--wide {
+    max-width: 880px;
+}
+
+@media (max-width: 767px) {
+    .card {
+        padding: 24px;
+    }
+
+    .contact-block {
+        padding: 4px 20px;
+    }
+}
+
+/* ---- Lift on hover (feature grids) -------------------------------------- */
+
+.feature--lift {
+    transition: translate .35s var(--ease-out), box-shadow .35s var(--ease-out), border-color .35s;
+}
+
+.feature--lift .feature__icon {
+    box-sizing: content-box;
+    padding: 14px;
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    transition: background-color .35s, color .35s;
+}
+
+.feature--lift:hover {
+    translate: 0 -6px;
+    box-shadow: var(--shadow-md);
+    border-color: transparent;
+}
+
+.feature--lift:hover .feature__icon {
+    background: var(--navy);
+    color: var(--bg);
+}
+
+/* ---- Contact cards carry their division's colour ------------------------ */
+
+.contact-card {
+    border-top: 3px solid var(--accent);
+    transition: translate .35s var(--ease-out), box-shadow .35s var(--ease-out);
+}
+
+.contact-card:hover {
+    translate: 0 -4px;
+    box-shadow: var(--shadow-md);
+}
+
+.contact-card__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 16px;
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.contact-card__icon .icon {
+    width: 22px;
+    height: 22px;
+}
+
+.contact-block--accent {
+    border-top: 3px solid var(--accent);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-lg);
 }

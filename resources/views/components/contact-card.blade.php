@@ -1,9 +1,8 @@
 @props(['card'])
 
-{{-- One contact block per division / location. --}}
+{{-- One contact card per division / location, used on the contact page. --}}
 
 @php
-    // Maps a row type to its icon and whether the link leaves the site.
     $icons = [
         'tel' => 'phone',
         'mail' => 'mail',
@@ -13,37 +12,29 @@
     ];
 @endphp
 
-<article class="card contact-card u-accent-{{ $card['key'] }}" data-reveal>
+<article {{ $attributes->class(['card', 'contact-card', "theme-{$card['key']}"])->merge(['data-aos' => 'fade-up']) }}>
     <header class="contact-card__head">
-        <h3 class="contact-card__name">{{ $card['name'] }}</h3>
+        <span class="contact-card__icon"><x-icon :name="config('site.divisions.' . $card['key'] . '.icon')" /></span>
+        <h2 class="card__title">{{ $card['name'] }}</h2>
         <span class="contact-card__place">
             <x-icon name="pin" />
             {{ $card['place'] }}
         </span>
     </header>
 
-    <div class="contact-card__rows">
+    <ul class="contact-card__rows">
         @foreach ($card['rows'] as $row)
-            @php
-                $external = str_starts_with($row['href'], 'http');
-            @endphp
-
-            <a
-                class="contact-row"
-                href="{{ $row['href'] }}"
-                @if ($external) target="_blank" rel="noopener noreferrer" @endif
-            >
-                <span class="contact-row__icon">
+            <li>
+                <a
+                    class="contact-row"
+                    href="{{ $row['href'] }}"
+                    @if (str_starts_with($row['href'], 'http')) target="_blank" rel="noopener noreferrer" @endif
+                >
                     <x-icon :name="$icons[$row['type']] ?? 'web'" />
-                </span>
-
-                <span class="sr-only">{{ $row['label'] }}:</span>
-                <span class="contact-row__value">{{ $row['value'] }}</span>
-
-                <span class="contact-row__go" aria-hidden="true">
-                    <x-icon name="arrow" />
-                </span>
-            </a>
+                    <span class="sr-only">{{ $row['label'] }}:</span>
+                    <span class="ltr">{{ $row['value'] }}</span>
+                </a>
+            </li>
         @endforeach
-    </div>
+    </ul>
 </article>

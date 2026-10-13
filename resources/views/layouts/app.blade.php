@@ -1,47 +1,60 @@
+@php
+    // Home keeps the group's full meta title; every other page is
+    // "{Page} — {Group}". Descriptions come from the page map in config/site.php.
+    $pageMeta = config("site.pages.{$page}");
+    $title = $page === 'home'
+        ? __('site.meta.title')
+        : __($pageMeta['label']) . ' — ' . $groupName;
+    $description = \Illuminate\Support\Str::limit(__($pageMeta['description']), 160);
+@endphp
 <!DOCTYPE html>
 <html lang="{{ $locale }}" dir="{{ $dir }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#07080C">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#FFFFFF">
 
-    <title>@yield('title', __('site.meta.title'))</title>
-    <meta name="description" content="@yield('description', __('site.meta.description'))">
+    <title>{{ $title }}</title>
+    <meta name="description" content="{{ $description }}">
 
     {{-- Each language has its own canonical URL. --}}
     <link rel="canonical" href="{{ url()->current() }}">
     @foreach (config('site.locales') as $code => $config)
-        <link rel="alternate" hreflang="{{ $code }}" href="{{ route($config['route']) }}">
+        <link rel="alternate" hreflang="{{ $code }}" href="{{ route("{$code}.{$page}") }}">
     @endforeach
-    <link rel="alternate" hreflang="x-default" href="{{ route('home.en') }}">
+    <link rel="alternate" hreflang="x-default" href="{{ route("en.{$page}") }}">
 
     {{-- Social preview --}}
     <meta property="og:type" content="website">
     <meta property="og:locale" content="{{ $locale === 'ar' ? 'ar_JO' : 'en_US' }}">
-    <meta property="og:title" content="{{ __('site.meta.title') }}">
-    <meta property="og:description" content="{{ __('site.meta.description') }}">
+    <meta property="og:title" content="{{ $title }}">
+    <meta property="og:description" content="{{ $description }}">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:card" content="summary">
 
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="48x48">
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 
-    {{-- Fonts: Sora for Latin, IBM Plex Sans Arabic for Arabic. --}}
+    {{-- One family per script, two weights each. --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Sora:wght@200;300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&family=IBM+Plex+Sans:wght@400;700&display=swap"
     >
+
+    @stack('head')
+
+    {{-- AOS hides [data-aos] elements until it runs; without JS, show everything. --}}
+    <noscript><style>[data-aos]{opacity:1!important;transform:none!important}.world-map__route{stroke-dashoffset:0!important}.world-map__pin circle{scale:1!important}</style></noscript>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
-    @include('partials.preloader')
-
+<body data-theme="{{ $theme }}">
     <a class="skip-link" href="#main">{{ __('site.nav.skip') }}</a>
 
-    @include('partials.background')
     @include('partials.header')
 
     <main id="main">
@@ -50,9 +63,11 @@
 
     @include('partials.footer')
 
-    <button class="to-top" type="button" data-to-top data-progress aria-label="{{ __('site.footer.top') }}">
-        <svg class="to-top__ring" viewBox="0 0 48 48" aria-hidden="true">
-            <circle cx="24" cy="24" r="23" pathLength="1" />
+    {{-- Back to top: appears after the first screen; the ring fills with scroll progress. --}}
+    <button class="to-top" type="button" data-to-top aria-label="{{ __('site.footer.top') }}" title="{{ __('site.footer.top') }}">
+        <svg class="to-top__ring" viewBox="0 0 52 52" aria-hidden="true">
+            <circle class="to-top__track" cx="26" cy="26" r="24" />
+            <circle class="to-top__progress" cx="26" cy="26" r="24" pathLength="100" />
         </svg>
         <x-icon name="arrow-up" />
     </button>

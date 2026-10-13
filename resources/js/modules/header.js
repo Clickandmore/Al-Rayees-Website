@@ -1,97 +1,88 @@
 /**
- * Header behaviour
- *  - compact/frosted state once the page is scrolled
- *  - reading-progress bar (shared with the back-to-top ring)
- *  - scroll-spy that highlights the active nav link
- *  - mobile drawer with focus containment
+ * Header
+ * - Mobile drawer: toggled by [data-nav-toggle]; Escape or a link closes it.
+ * - Divisions dropdown ([data-dropdown]): opens on hover via CSS; the
+ *   button toggles it for click / keyboard users, Escape and outside
+ *   clicks close it.
  */
 export default function initHeader() {
+    initScrolled();
+    initDrawer();
+    initDropdowns();
+}
+
+// Adds .is-scrolled once the page leaves the top, for the header's shadow.
+function initScrolled() {
     const header = document.querySelector('[data-header]');
+
+    if (!header) return;
+
+    const update = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+}
+
+function initDrawer() {
     const toggle = document.querySelector('[data-nav-toggle]');
     const drawer = document.querySelector('[data-drawer]');
-    const progressTargets = document.querySelectorAll('[data-progress]');
-    const links = document.querySelectorAll('[data-nav-link]');
-
-    /* ---- Scroll state + progress ---------------------------------------- */
-
-    let ticking = false;
-
-    const onScroll = () => {
-        const y = window.scrollY;
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = max > 0 ? Math.min(y / max, 1) : 0;
-
-        header?.classList.toggle('is-stuck', y > 40);
-        progressTargets.forEach((el) => el.style.setProperty('--progress', progress.toFixed(4)));
-
-        ticking = false;
-    };
-
-    const requestScroll = () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(onScroll);
-    };
-
-    window.addEventListener('scroll', requestScroll, { passive: true });
-    window.addEventListener('resize', requestScroll, { passive: true });
-    onScroll();
-
-    /* ---- Scroll spy ------------------------------------------------------ */
-
-    const spied = [...links]
-        .map((link) => {
-            const id = link.getAttribute('href')?.replace(/^.*#/, '');
-            const section = id ? document.getElementById(id) : null;
-            return section ? { link, section } : null;
-        })
-        .filter(Boolean);
-
-    if (spied.length && 'IntersectionObserver' in window) {
-        const spy = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) return;
-                    const match = spied.find((s) => s.section === entry.target);
-                    links.forEach((l) => l.classList.remove('is-active'));
-                    match?.link.classList.add('is-active');
-                });
-            },
-            { rootMargin: '-45% 0px -50% 0px' }
-        );
-
-        spied.forEach(({ section }) => spy.observe(section));
-    }
-
-    /* ---- Mobile drawer --------------------------------------------------- */
 
     if (!toggle || !drawer) return;
 
-    const setDrawer = (open) => {
+    const setOpen = (open) => {
         toggle.setAttribute('aria-expanded', String(open));
-        drawer.classList.toggle('is-open', open);
-        drawer.setAttribute('aria-hidden', String(!open));
+        drawer.hidden = !open;
         document.body.classList.toggle('is-locked', open);
     };
 
     toggle.addEventListener('click', () => {
-        setDrawer(toggle.getAttribute('aria-expanded') !== 'true');
+        setOpen(toggle.getAttribute('aria-expanded') !== 'true');
     });
 
     drawer.addEventListener('click', (event) => {
-        if (event.target.closest('a')) setDrawer(false);
+        if (event.target.closest('a')) setOpen(false);
     });
 
     document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && drawer.classList.contains('is-open')) {
-            setDrawer(false);
+        if (event.key === 'Escape' && !drawer.hidden) {
+            setOpen(false);
             toggle.focus();
         }
     });
 
-    // Close when the viewport grows back to the desktop nav.
-    const desktop = window.matchMedia('(min-width: 1081px)');
-    desktop.addEventListener('change', (event) => {
-        if (event.matches) setDrawer(false);
+    // The drawer only exists below the desktop breakpoint.
+    window.matchMedia('(min-width: 1024px)').addEventListener('change', (event) => {
+        if (event.matches) setOpen(false);
+    });
+}
+
+function initDropdowns() {
+    document.querySelectorAll('[data-dropdown]').forEach((item) => {
+        const button = item.querySelector('button[aria-controls]');
+
+        if (!button) return;
+
+        const setOpen = (open) => {
+            item.classList.toggle('is-open', open);
+            button.setAttribute('aria-expanded', String(open));
+        };
+
+        button.addEventListener('click', () => {
+            setOpen(!item.classList.contains('is-open'));
+        });
+
+        item.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && item.classList.contains('is-open')) {
+                setOpen(false);
+                button.focus();
+            }
+        });
+
+        item.addEventListener('focusout', (event) => {
+            if (!item.contains(event.relatedTarget)) setOpen(false);
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!item.contains(event.target)) setOpen(false);
+        });
     });
 }

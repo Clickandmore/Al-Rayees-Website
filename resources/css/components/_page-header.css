@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Page header (about, contact) — navy band, monogram watermark
+   Breadcrumb — light and dark variants
+   ========================================================================== */
+
+.page-header {
+    position: relative;
+    padding-block: 72px 96px;
+    overflow: hidden;
+    background: var(--navy);
+    color: var(--on-navy);
+}
+
+.page-header__mark {
+    position: absolute;
+    inset-inline-end: 6%;
+    top: 50%;
+    height: 135%;
+    width: auto;
+    opacity: .09;
+    translate: 0 -50%;
+    pointer-events: none;
+    animation: mark-in 1.6s var(--ease-out) both;
+}
+
+@keyframes mark-in {
+    from { opacity: 0; transform: translateY(40px) rotate(-6deg); }
+}
+
+.page-header__inner {
+    position: relative;
+}
+
+.page-header__title {
+    max-width: 880px;
+    margin-top: 32px;
+    color: var(--bg);
+    font-size: var(--fs-hero);
+}
+
+.page-header__title::after {
+    content: "";
+    display: block;
+    width: 56px;
+    height: 3px;
+    margin-top: 24px;
+    background: var(--gold);
+}
+
+.page-header__lead {
+    max-width: 680px;
+    margin-top: 24px;
+    font-size: 18px;
+}
+
+.page-header__actions {
+    margin-top: 32px;
+}
+
+@media (max-width: 767px) {
+    .page-header {
+        padding-block: 40px 56px;
+    }
+}
+
+/* ---- Breadcrumb --------------------------------------------------------- */
+
+.breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 0;
+    color: var(--muted);
+    font-size: var(--fs-sm);
+}
+
+.breadcrumb li + li::before {
+    content: "/";
+    margin-inline: 10px;
+    color: var(--border-strong);
+}
+
+.breadcrumb a:hover {
+    color: var(--navy);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.breadcrumb [aria-current="page"] {
+    color: var(--text);
+}
+
+/* On navy / ink / royal bands */
+.page-header .breadcrumb ol,
+.breadcrumb--dark ol {
+    color: rgba(255, 255, 255, .72);
+}
+
+.page-header .breadcrumb li + li::before,
+.breadcrumb--dark li + li::before {
+    color: rgba(255, 255, 255, .35);
+}
+
+.page-header .breadcrumb a:hover,
+.breadcrumb--dark a:hover,
+.page-header .breadcrumb [aria-current="page"],
+.breadcrumb--dark [aria-current="page"] {
+    color: var(--bg);
+}

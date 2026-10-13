@@ -1,71 +1,36 @@
 /* ==========================================================================
-   Tabs — used for the charcoal market panels (Jordan / Syria)
+   Tabs — underlined tab list
    ========================================================================== */
 
-.tabs {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1.25rem, 2.5vw, 2rem);
-}
-
 .tabs__list {
-    position: relative;
-    display: inline-flex;
-    align-self: flex-start;
-    gap: 0.25rem;
-    padding: 0.3rem;
-    border-radius: var(--r-pill);
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.028);
-}
-
-/* Sliding indicator positioned by js/tabs.js.
-   Uses physical `left` on purpose: the offset is measured from layout, which
-   is already direction-aware, so a logical inset would double-flip it. */
-.tabs__marker {
-    position: absolute;
-    inset-block: 0.3rem;
-    left: 0;
-    border-radius: var(--r-pill);
-    background: rgba(var(--accent-rgb), 0.16);
-    border: 1px solid rgba(var(--accent-rgb), 0.42);
-    inline-size: var(--marker-w, 0);
-    transform: translateX(var(--marker-x, 0));
-    transition: transform var(--t-mid) var(--ease-out), inline-size var(--t-mid) var(--ease-out);
-    pointer-events: none;
+    display: flex;
+    gap: 32px;
+    border-bottom: 1px solid var(--border);
 }
 
 .tabs__tab {
-    position: relative;
-    z-index: 1;
-    padding: 0.6rem 1.35rem;
-    border-radius: var(--r-pill);
-    font-size: var(--fs-sm);
-    font-weight: 500;
-    color: var(--fg-3);
-    transition: color var(--t-fast);
+    margin-bottom: -1px;
+    padding-block: 12px;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 
 .tabs__tab:hover {
-    color: var(--fg-2);
+    color: var(--navy);
 }
 
-.tabs__tab[aria-selected='true'] {
-    color: var(--accent-2);
+.tabs__tab[aria-selected="true"] {
+    color: var(--navy);
+    border-bottom-color: var(--navy);
 }
 
 .tabs__panel {
+    padding-top: 40px;
+}
+
+.tabs__panel[hidden] {
     display: none;
-}
-
-.tabs__panel.is-active {
-    display: block;
-    animation: tab-in 0.5s var(--ease-out);
-}
-
-@keyframes tab-in {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
 }

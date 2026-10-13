@@ -1,0 +1,83 @@
+/* ==========================================================================
+   World map — highlighted countries, pins, and routes that draw in when
+   AOS marks the map (or an ancestor) with .aos-animate
+   ========================================================================== */
+
+.world-map svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.world-map--light {
+    --map-country: var(--accent);
+    --map-country-opacity: .28;
+    --map-route: var(--accent);
+    --map-pin: var(--navy);
+}
+
+.world-map--dark {
+    --map-country: var(--accent-on-dark);
+    --map-country-opacity: .35;
+    --map-route: var(--accent-on-dark);
+    --map-pin: var(--bg);
+}
+
+.world-map__countries path {
+    fill: var(--map-country);
+    fill-opacity: var(--map-country-opacity);
+    stroke: var(--map-country);
+    stroke-opacity: .6;
+    stroke-width: .6;
+}
+
+.world-map__route {
+    fill: none;
+    stroke: var(--map-route);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1.6s var(--ease-out) calc(.4s + var(--i) * .18s);
+}
+
+.world-map__pin circle {
+    fill: var(--map-pin);
+    stroke: var(--map-route);
+    stroke-width: 2;
+    transform-box: fill-box;
+    transform-origin: center;
+    scale: 0;
+    transition: scale .5s var(--ease-out) calc(.2s + var(--i) * .08s);
+}
+
+.world-map__pin--hub circle {
+    fill: var(--map-route);
+    stroke: var(--map-pin);
+    stroke-width: 3;
+}
+
+.aos-animate .world-map__route,
+.world-map.aos-animate .world-map__route {
+    stroke-dashoffset: 0;
+}
+
+.aos-animate .world-map__pin circle,
+.world-map.aos-animate .world-map__pin circle {
+    scale: 1;
+}
+
+/* Bordered tile for maps on light bands. */
+.world-map--framed {
+    padding: 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+/* Without motion (or without AOS), show the finished map. */
+@media (prefers-reduced-motion: reduce) {
+    .world-map__route { stroke-dashoffset: 0; }
+    .world-map__pin circle { scale: 1; }
+}

@@ -1,47 +1,28 @@
 /**
- * Counters
- * Counts [data-count] elements up to their target the first time they are
- * seen.
- *
- * Digits are pinned to the Latin numbering system in both languages: the
- * Arabic copy already writes its figures that way, and the display face
- * (Sora) carries no Arabic-Indic glyphs, so letting the locale decide would
- * swap in a fallback font mid-number.
+ * Count-up figures
+ * Every [data-count] element counts from 0 to its value the first time it
+ * scrolls into view. The final number is already in the markup, so without
+ * JavaScript (or with reduced motion) the figure simply reads as written.
  */
-const DURATION = 1600;
-const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+export default function initCounters(reducedMotion = false) {
+    const items = document.querySelectorAll('[data-count]');
 
-export default function initCounters() {
-    const nodes = document.querySelectorAll('[data-count]');
-
-    if (!nodes.length) return;
-
-    const format = new Intl.NumberFormat('en-US');
-    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!items.length || reducedMotion || !('IntersectionObserver' in window)) return;
 
     const run = (el) => {
-        const target = Number(el.dataset.count) || 0;
-
-        if (still || !('IntersectionObserver' in window)) {
-            el.textContent = format.format(target);
-            return;
-        }
-
+        const target = Number(el.dataset.count);
+        const duration = 1600;
         const start = performance.now();
 
-        const step = (now) => {
-            const t = Math.min((now - start) / DURATION, 1);
-            el.textContent = format.format(Math.round(easeOut(t) * target));
-            if (t < 1) requestAnimationFrame(step);
+        const tick = (now) => {
+            const t = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            el.textContent = Math.round(target * eased);
+            if (t < 1) requestAnimationFrame(tick);
         };
 
-        requestAnimationFrame(step);
+        requestAnimationFrame(tick);
     };
-
-    if (!('IntersectionObserver' in window)) {
-        nodes.forEach(run);
-        return;
-    }
 
     const observer = new IntersectionObserver(
         (entries) => {
@@ -54,8 +35,8 @@ export default function initCounters() {
         { threshold: 0.6 }
     );
 
-    nodes.forEach((el) => {
-        el.textContent = format.format(0);
+    items.forEach((el) => {
+        el.textContent = '0';
         observer.observe(el);
     });
 }

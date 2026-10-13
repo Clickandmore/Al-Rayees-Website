@@ -1,0 +1,359 @@
+/* ==========================================================================
+   Divisions menu (header dropdown + mobile drawer), footer divisions,
+   back-to-top button
+   ========================================================================== */
+
+/* ---- Divisions menu ---------------------------------------------------- */
+
+.divmenu {
+    padding: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 24px 56px rgba(11, 28, 46, .14), 0 2px 6px rgba(11, 28, 46, .05);
+}
+
+/* Small notch pointing at the trigger. */
+.dropdown.divmenu::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    rotate: 45deg;
+    translate: -50% 0;
+}
+
+.divmenu__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+}
+
+.divmenu__card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 10px;
+    transition: background-color .25s var(--ease);
+}
+
+.divmenu__card:hover,
+.divmenu__card.is-active {
+    background: var(--accent-soft);
+}
+
+.divmenu__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    transition: background-color .25s, color .25s, scale .35s var(--ease-out);
+}
+
+.divmenu__card:hover .divmenu__icon,
+.divmenu__card.is-active .divmenu__icon {
+    background: var(--accent);
+    color: var(--bg);
+    scale: 1.06;
+}
+
+.divmenu__icon .icon {
+    width: 22px;
+    height: 22px;
+}
+
+.divmenu__body {
+    min-width: 0;
+}
+
+/* The title link covers the whole card; chips sit above it. */
+.divmenu__title {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.divmenu__title::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+
+.divmenu__title:focus-visible {
+    outline: none;
+}
+
+.divmenu__card:has(.divmenu__title:focus-visible) {
+    outline: 2px solid var(--navy);
+    outline-offset: -2px;
+}
+
+.divmenu__arrow {
+    width: 16px;
+    height: 16px;
+    color: var(--accent);
+    opacity: 0;
+    translate: -4px 0;
+    transition: opacity .25s, translate .3s var(--ease-out);
+}
+
+[dir="rtl"] .divmenu__arrow {
+    translate: 4px 0;
+}
+
+.divmenu__card:hover .divmenu__arrow {
+    opacity: 1;
+    translate: 0 0;
+}
+
+.divmenu__text {
+    display: -webkit-box;
+    margin-top: 2px;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.divmenu__chips {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.divmenu__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.6;
+    transition: background-color .2s, color .2s, border-color .2s;
+}
+
+.divmenu__chip .icon {
+    width: 14px;
+    height: 14px;
+}
+
+.divmenu__chip:hover,
+.divmenu__chip[aria-current="page"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+}
+
+.divmenu__all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 12px;
+    border-top: 1px solid var(--border);
+    color: var(--navy);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+}
+
+.divmenu__all .icon {
+    width: 16px;
+    height: 16px;
+    transition: translate .3s var(--ease-out);
+}
+
+.divmenu__all:hover .icon {
+    translate: 4px 0;
+}
+
+[dir="rtl"] .divmenu__all:hover .icon {
+    translate: -4px 0;
+}
+
+/* In the drawer: one column, no panel chrome. */
+.divmenu--drawer {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+}
+
+.divmenu--drawer .divmenu__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+}
+
+.divmenu--drawer .divmenu__card {
+    border: 1px solid var(--border);
+}
+
+.divmenu--drawer .divmenu__arrow {
+    opacity: 1;
+    translate: 0 0;
+}
+
+/* ---- Footer: divisions with their profiles ----------------------------- */
+
+.footer__divisions li + li {
+    margin-top: 14px;
+}
+
+.footer__division {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer__division-icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .07);
+    color: var(--accent-on-dark);
+    transition: background-color .25s, color .25s;
+}
+
+.footer__col .footer__division-icon .icon {
+    width: 15px;
+    height: 15px;
+}
+
+.footer__division:hover .footer__division-icon {
+    background: var(--accent-on-dark);
+    color: var(--navy);
+}
+
+.footer__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+    padding-inline-start: 38px;
+}
+
+.footer__col .footer__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 10px;
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 999px;
+    color: var(--on-navy);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.footer__col .footer__chip .icon {
+    width: 12px;
+    height: 12px;
+}
+
+.footer__col .footer__chip:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+/* ---- Back to top ------------------------------------------------------- */
+
+.to-top {
+    --progress: 0;
+    position: fixed;
+    inset-inline-end: 24px;
+    bottom: 24px;
+    z-index: 40;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--bg);
+    box-shadow: 0 10px 28px rgba(11, 28, 46, .28);
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 16px;
+    scale: .85;
+    transition: opacity .3s var(--ease), translate .4s var(--ease-out), scale .4s var(--ease-out), visibility 0s linear .4s, background-color .25s;
+}
+
+.to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    translate: 0 0;
+    scale: 1;
+    transition-delay: 0s;
+}
+
+.to-top:hover {
+    background: var(--text);
+}
+
+.to-top > .icon {
+    width: 20px;
+    height: 20px;
+    transition: translate .3s var(--ease-out);
+}
+
+.to-top:hover > .icon {
+    translate: 0 -3px;
+}
+
+.to-top__ring {
+    position: absolute;
+    inset: 0;
+    rotate: -90deg;
+    fill: none;
+    stroke-width: 2.5;
+}
+
+.to-top__track {
+    stroke: rgba(255, 255, 255, .15);
+}
+
+.to-top__progress {
+    stroke: var(--accent-on-dark, var(--gold));
+    stroke-dasharray: 100;
+    stroke-dashoffset: calc(100 - var(--progress));
+    stroke-linecap: round;
+}
+
+@media (max-width: 767px) {
+    .to-top {
+        inset-inline-end: 16px;
+        bottom: 16px;
+        width: 46px;
+        height: 46px;
+    }
+}
+
+/* Keep the footer's last line clear of the floating button. */
+.footer__bottom {
+    padding-inline-end: 72px;
+}

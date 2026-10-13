@@ -1,34 +1,60 @@
 @php
-    // Nav links: the group-level sections plus each division.
-    $navSections = collect(config('site.sections'))->where('nav', true);
-    $altRoute = config("site.locales.{$altLocale}.route");
+    $divisions = array_keys(config('site.divisions'));
+    $parent = config("site.pages.{$page}.parent");
+    $inDivisions = in_array($page, $divisions, true) || $parent !== null;
+
+    $current = fn (string $key) => $page === $key ? 'page' : null;
 @endphp
 
 <header class="header" data-header>
-    <div class="header__bar">
-        <a class="brand" href="{{ route(config("site.locales.{$locale}.route")) }}" aria-label="{{ config('site.company.name') }}">
-            <span class="brand__mark"><x-logo /></span>
-            <span class="brand__text">
-                <span class="brand__name">{{ __('site.brand.name') }}</span>
-                <span class="brand__suffix">{{ __('site.brand.suffix') }}</span>
-            </span>
+    <div class="container header__bar">
+        <a class="header__brand" href="{{ route("{$locale}.home") }}">
+            <x-logo />
         </a>
 
         <nav class="nav" aria-label="{{ __('site.nav.menu') }}">
-            @foreach ($navSections as $section)
-                <a class="nav__link" href="#{{ $section['id'] }}" data-nav-link>
-                    {{ __($section['label']) }}
-                </a>
-            @endforeach
+            <ul class="nav__list">
+                <li><a class="nav__link" href="{{ route("{$locale}.home") }}" aria-current="{{ $current('home') }}">{{ __('site.nav.home') }}</a></li>
+                <li><a class="nav__link" href="{{ route("{$locale}.about") }}" aria-current="{{ $current('about') }}">{{ __('site.nav.about') }}</a></li>
+
+                <li class="nav__item" data-dropdown>
+                    <button
+                        @class(['nav__link', 'nav__link--trigger', 'is-active' => $inDivisions])
+                        type="button"
+                        aria-expanded="false"
+                        aria-controls="nav-divisions"
+                    >
+                        {{ __('site.nav.divisions') }}
+                        <x-icon name="chevron-down" />
+                    </button>
+
+                    <div class="dropdown divmenu" id="nav-divisions">
+                        @include('partials.divisions-menu')
+
+                        <a class="divmenu__all" href="{{ route("{$locale}.home") }}#divisions">
+                            {{ __('site.nav.all_divisions') }}
+                            <x-icon name="arrow" class="icon-flip" />
+                        </a>
+                    </div>
+                </li>
+
+                <li><a class="nav__link" href="{{ route("{$locale}.contact") }}" aria-current="{{ $current('contact') }}">{{ __('site.nav.contact') }}</a></li>
+            </ul>
         </nav>
 
         <div class="header__actions">
-            <a class="lang-switch" href="{{ route($altRoute) }}" hreflang="{{ $altLocale }}" title="{{ __('site.nav.lang_full') }}">
+            <a
+                class="lang-switch"
+                href="{{ route("{$altLocale}.{$page}") }}"
+                hreflang="{{ $altLocale }}"
+                lang="{{ $altLocale }}"
+                title="{{ __('site.nav.lang_full') }}"
+            >
                 <x-icon name="languages" />
                 {{ __('site.nav.lang') }}
             </a>
 
-            <a class="btn btn--primary btn--sm header__cta" href="#contact" data-magnetic>
+            <a class="btn btn--primary btn--sm header__cta" href="{{ route("{$locale}.contact") }}">
                 {{ __('site.nav.cta') }}
             </a>
 
@@ -38,24 +64,36 @@
                 data-nav-toggle
                 aria-expanded="false"
                 aria-controls="site-drawer"
-                aria-label="{{ __('site.nav.menu') }}"
             >
-                <span class="nav-toggle__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="sr-only">{{ __('site.nav.menu') }}</span>
+                <x-icon name="menu" class="nav-toggle__open" />
+                <x-icon name="x" class="nav-toggle__close" />
             </button>
         </div>
     </div>
-
-    <span class="header__progress" data-progress aria-hidden="true"></span>
 </header>
 
-{{-- Mobile drawer: every section, including the individual divisions. --}}
-<div class="drawer" id="site-drawer" data-drawer aria-hidden="true">
-    <nav class="container drawer__list" aria-label="{{ __('site.nav.menu') }}">
-        @foreach (config('site.sections') as $i => $section)
-            <a class="drawer__link" href="#{{ $section['id'] }}" style="--i: {{ $i }}">
-                <span class="drawer__index num">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                {{ __($section['label']) }}
+{{-- Mobile drawer: the same links, with the divisions listed inline. --}}
+<div class="drawer" id="site-drawer" data-drawer hidden>
+    <nav class="container" aria-label="{{ __('site.nav.menu') }}">
+        <ul class="drawer__list">
+            <li><a class="drawer__link" href="{{ route("{$locale}.home") }}" aria-current="{{ $current('home') }}">{{ __('site.nav.home') }}</a></li>
+            <li><a class="drawer__link" href="{{ route("{$locale}.about") }}" aria-current="{{ $current('about') }}">{{ __('site.nav.about') }}</a></li>
+            <li>
+                <span class="drawer__group">{{ __('site.nav.divisions') }}</span>
+                <div class="divmenu divmenu--drawer">
+                    @include('partials.divisions-menu')
+                </div>
+            </li>
+            <li><a class="drawer__link" href="{{ route("{$locale}.contact") }}" aria-current="{{ $current('contact') }}">{{ __('site.nav.contact') }}</a></li>
+        </ul>
+
+        <div class="drawer__actions">
+            <a class="btn btn--primary" href="{{ route("{$locale}.contact") }}">{{ __('site.nav.cta') }}</a>
+            <a class="btn btn--outline" href="{{ route("{$altLocale}.{$page}") }}" hreflang="{{ $altLocale }}" lang="{{ $altLocale }}">
+                <x-icon name="languages" />
+                {{ __('site.nav.lang') }}
             </a>
-        @endforeach
+        </div>
     </nav>
 </div>

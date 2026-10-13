@@ -1,11 +1,11 @@
-@props(['items' => []])
+@props(['items' => [], 'columns' => 1])
 
-{{-- Ticked list used for shipment documents and partnership benefits. --}}
+{{-- Ticked list: shipment documents, partnership benefits, services, specs. --}}
 
-<ul class="checklist" {{ $attributes }} data-reveal-group>
+<ul {{ $attributes->class(['checklist', "checklist--cols-{$columns}" => $columns > 1]) }}>
     @foreach ($items as $item)
-        <li class="checklist__item" data-reveal="left">
-            <span class="checklist__mark" aria-hidden="true"><x-icon name="check" /></span>
+        <li class="checklist__item">
+            <x-icon name="check" class="checklist__mark" />
             <span>{{ $item }}</span>
         </li>
     @endforeach

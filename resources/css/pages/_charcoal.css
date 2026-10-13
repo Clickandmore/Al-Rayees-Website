@@ -1,0 +1,400 @@
+/* ==========================================================================
+   Al Rayees Charcoal — industrial: charcoal black, ember accent
+   ========================================================================== */
+
+/* ---- Hero: full-bleed factory photo ------------------------------------- */
+
+.ch-hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: min(86vh, 760px);
+    padding-block: 120px 56px;
+    overflow: hidden;
+    background: var(--ink);
+    color: var(--on-ink);
+}
+
+.ch-hero__bg {
+    position: absolute;
+    inset: 0;
+}
+
+.ch-hero__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: settle 3s var(--ease-out) both;
+}
+
+/* Darken towards the copy so white text stays legible over the photo. */
+.ch-hero__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(20, 22, 25, .45) 0%, rgba(20, 22, 25, .7) 45%, rgba(20, 22, 25, .96) 100%);
+}
+
+.ch-hero__inner {
+    position: relative;
+}
+
+.ch-hero__title {
+    margin-top: 24px;
+    color: var(--bg);
+    font-size: clamp(40px, 7vw, 80px);
+    line-height: 1.15;
+}
+
+.ch-hero__tagline {
+    max-width: 640px;
+    margin-top: 16px;
+    color: var(--on-ink);
+    font-size: var(--fs-md);
+}
+
+.ch-specs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 56px;
+    border-top: 1px solid rgba(255, 255, 255, .18);
+}
+
+.ch-specs li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 24px 0;
+    border-inline-start: 1px solid rgba(255, 255, 255, .18);
+    color: var(--bg);
+    font-weight: 700;
+}
+
+.ch-specs li:first-child {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+}
+
+.ch-specs .icon {
+    width: 26px;
+    height: 26px;
+    color: var(--accent-on-dark);
+}
+
+@media (max-width: 767px) {
+    .ch-specs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 8px;
+    }
+
+    .ch-specs li {
+        padding: 16px 12px 0;
+        font-size: var(--fs-sm);
+    }
+
+    .ch-specs li:nth-child(odd) {
+        padding-inline-start: 0;
+        border-inline-start: 0;
+    }
+}
+
+/* ---- Intro photos: glowing coals with the factory inset ----------------- */
+
+.ch-glow {
+    position: relative;
+    max-width: 440px;
+    margin-inline: auto;
+    padding-bottom: 40px;
+}
+
+.ch-glow__photo {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--radius-lg);
+}
+
+.ch-glow__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Ember frame offset behind the photo. */
+.ch-glow::before {
+    content: "";
+    position: absolute;
+    inset: 24px -24px 64px 24px;
+    border: 2px solid var(--accent-on-dark);
+    border-radius: var(--radius-lg);
+}
+
+.ch-glow__inset {
+    position: absolute;
+    inset-inline-start: -64px;
+    bottom: 0;
+    width: 58%;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border: 6px solid var(--ink);
+    border-radius: var(--radius-lg);
+}
+
+.ch-glow__inset img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 767px) {
+    .ch-glow__inset {
+        inset-inline-start: -8px;
+    }
+}
+
+/* ---- Products ----------------------------------------------------------- */
+
+.ch-product {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 32px 32px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: translate .4s var(--ease-out), box-shadow .4s var(--ease-out), border-color .4s;
+}
+
+.ch-product:hover {
+    translate: 0 -8px;
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent);
+}
+
+.ch-product__num {
+    margin-bottom: 20px;
+    color: transparent;
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1;
+    -webkit-text-stroke: 1.5px var(--accent);
+}
+
+.ch-product__title {
+    margin-bottom: 12px;
+    font-size: var(--fs-md);
+}
+
+.ch-product__text {
+    color: var(--muted);
+}
+
+.ch-product__specs {
+    margin-top: auto;
+    padding-top: 24px;
+}
+
+.ch-product--featured {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--on-ink);
+}
+
+.ch-product--featured .ch-product__title {
+    color: var(--bg);
+}
+
+.ch-product--featured .ch-product__text {
+    color: var(--on-ink);
+}
+
+.ch-product--featured .ch-product__num {
+    -webkit-text-stroke-color: var(--accent-on-dark);
+}
+
+.ch-product--featured .checklist__mark {
+    color: var(--accent-on-dark);
+}
+
+/* ---- Guarantees --------------------------------------------------------- */
+
+.ch-guarantee {
+    position: relative;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255, 255, 255, .14);
+}
+
+/* Ember rule grows along the top edge as the item appears. */
+.ch-guarantee::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    top: -1px;
+    width: 0;
+    height: 2px;
+    background: var(--accent-on-dark);
+    transition: width 1s var(--ease-out) .3s;
+}
+
+.ch-guarantee.aos-animate::before {
+    width: 64px;
+}
+
+.ch-guarantee__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(240, 138, 60, .5);
+    border-radius: 50%;
+    color: var(--accent-on-dark);
+}
+
+.ch-guarantee__icon .icon {
+    width: 26px;
+    height: 26px;
+}
+
+.ch-guarantee__title {
+    margin-bottom: 10px;
+    font-size: var(--fs-md);
+}
+
+.ch-guarantee p {
+    color: var(--on-ink);
+}
+
+/* ---- Services as steps -------------------------------------------------- */
+
+.steps {
+    position: relative;
+    display: grid;
+    gap: 36px;
+    margin-top: 40px;
+}
+
+.steps::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 21px;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: var(--border);
+}
+
+.steps__item {
+    position: relative;
+    padding-inline-start: 72px;
+}
+
+.steps__dot {
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--accent);
+    font-weight: 700;
+    transition: background-color .3s, color .3s;
+}
+
+.steps__item:hover .steps__dot {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.steps__title {
+    margin-bottom: 6px;
+    font-size: var(--fs-md);
+}
+
+.steps__text {
+    color: var(--muted);
+}
+
+/* ---- Shipment documents ------------------------------------------------- */
+
+.ch-docs {
+    align-self: start;
+    padding: 48px;
+    background: var(--ink);
+    border-radius: var(--radius-lg);
+    color: var(--on-ink);
+    box-shadow: var(--shadow-lg);
+}
+
+.ch-docs .section__title {
+    color: var(--bg);
+}
+
+.ch-docs .section__lead {
+    color: var(--on-ink);
+}
+
+.ch-docs__icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 24px;
+    color: var(--accent-on-dark);
+}
+
+.ch-docs .checklist__mark {
+    color: var(--accent-on-dark);
+}
+
+@media (max-width: 767px) {
+    .ch-docs {
+        padding: 32px 24px;
+    }
+}
+
+/* ---- Export map --------------------------------------------------------- */
+
+.ch-export {
+    margin-top: 64px;
+    padding: 32px;
+    background: var(--ink-2);
+    border-radius: var(--radius-lg);
+}
+
+.ch-export__markets {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, .12);
+}
+
+.ch-export__markets > .icon {
+    width: 26px;
+    height: 26px;
+    color: var(--accent-on-dark);
+}
+
+.ch-export .inline-list {
+    color: var(--bg);
+    font-weight: 700;
+}
+
+.ch-export .inline-list li {
+    border-color: rgba(255, 255, 255, .2);
+}
+
+@media (max-width: 767px) {
+    .ch-export {
+        padding: 16px;
+    }
+}
+
+/* Tabs and contact blocks pick up the ember accent on this page. */
+[data-theme="charcoal"] .tabs__tab[aria-selected="true"] {
+    border-bottom-color: var(--accent);
+}

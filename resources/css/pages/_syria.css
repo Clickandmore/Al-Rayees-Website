@@ -1,0 +1,742 @@
+/* ==========================================================================
+   Al Rayees Charcoal — Syria profile
+   Bright white slides, warm yellow-gold discs, photos in gold rings,
+   rounded pill cards and a yellow ribbon — after "ملف الريس - سوريا.pdf".
+   ========================================================================== */
+
+.sy-title,
+.sy-hero__name,
+.sy-chem__value,
+.sy-spec strong {
+    font-family: var(--font-display);
+}
+
+/* ---- Bands and ornaments ------------------------------------------------- */
+
+.sy-band {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+}
+
+.sy-band--alt {
+    background: #FBFAF6;
+}
+
+.sy-band > .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Warm gold discs — the PDF's signature shape. */
+.sy-disc {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--sun-2), var(--sun) 70%);
+    pointer-events: none;
+}
+
+.sy-disc--a { width: 360px; height: 360px; inset-inline-end: -140px; top: -120px; animation: drift 14s ease-in-out infinite; }
+.sy-disc--b { width: 90px;  height: 90px;  inset-inline-end: 30%;    top: 60px;   animation: drift 10s ease-in-out -3s infinite; }
+.sy-disc--c { width: 260px; height: 260px; inset-inline-start: -120px; bottom: 40px; opacity: .9; animation: drift 16s ease-in-out -6s infinite; }
+
+.sy-disc--edge-end   { width: 140px; height: 140px; inset-inline-end: -70px;  top: 30%; }
+.sy-disc--edge-start { width: 140px; height: 140px; inset-inline-start: -70px; bottom: 15%; }
+
+@keyframes drift {
+    50% { translate: 0 18px; }
+}
+
+/* Dot grid ornament. */
+.sy-dots {
+    position: absolute;
+    inset-inline-start: 24px;
+    top: 48px;
+    width: 72px;
+    height: 72px;
+    background: radial-gradient(circle, var(--sun) 2.5px, transparent 3px) 0 0 / 18px 18px;
+    pointer-events: none;
+}
+
+.sy-dots--hero {
+    inset-inline-start: 42%;
+    top: 64px;
+}
+
+.sy-head {
+    max-width: 900px;
+    margin-bottom: 56px;
+}
+
+.sy-head--center {
+    margin-inline: auto;
+    text-align: center;
+}
+
+.sy-title {
+    color: #111;
+    font-size: clamp(26px, 3.2vw, 40px);
+    font-weight: 800;
+    line-height: 1.45;
+}
+
+.sy-title--xl {
+    font-size: clamp(34px, 5vw, 64px);
+    line-height: 1.25;
+}
+
+.sy-title--hero {
+    font-size: clamp(38px, 5.4vw, 68px);
+    line-height: 1.3;
+}
+
+.sy-sub {
+    margin-top: 12px;
+    color: #333;
+    font-size: clamp(18px, 2vw, 24px);
+}
+
+/* Photo set in a white-and-gold ring. */
+.sy-ring {
+    position: relative;
+    justify-self: center;
+    aspect-ratio: 1;
+    width: min(100%, 460px);
+    padding: 14px;
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow: 0 0 0 16px var(--sun), 0 30px 60px rgba(161, 108, 0, .25);
+}
+
+.sy-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: scale 1s var(--ease-out);
+}
+
+.sy-ring:hover img {
+    scale: 1.05;
+}
+
+/* ---- Hero --------------------------------------------------------------- */
+
+.sy-hero {
+    position: relative;
+    padding-top: 64px;
+    overflow: hidden;
+    background: var(--bg);
+}
+
+.sy-hero__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: 64px;
+    align-items: center;
+    padding-bottom: 88px;
+}
+
+.sy-hero__brand {
+    width: 200px;
+    height: auto;
+    margin-block: 32px 8px;
+}
+
+.sy-hero__name {
+    color: #111;
+    font-size: clamp(80px, 14vw, 180px);
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.sy-hero__register {
+    margin-bottom: 32px;
+    color: #111;
+    font-size: clamp(18px, 2vw, 24px);
+}
+
+.sy-pill-card {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 520px;
+    margin-bottom: 32px;
+    border-radius: 24px;
+    background: linear-gradient(120deg, #F6D24A, #F8E7A6 55%, #E8B923);
+    box-shadow: 0 16px 36px rgba(161, 108, 0, .2);
+}
+
+.sy-pill-card > * {
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+    padding: 24px 16px;
+    color: #111;
+    text-align: center;
+}
+
+.sy-pill-card .icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
+}
+
+.sy-pill-card strong {
+    font-size: 18px;
+}
+
+.sy-pill-card a:hover strong {
+    text-decoration: underline;
+}
+
+.sy-hero__photo {
+    width: min(100%, 480px);
+}
+
+/* Yellow ribbon along the foot of the hero, as on every slide. */
+.sy-strap {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(90deg, #EDB21F, #F7E3A1 60%, #FBF1CF);
+}
+
+[dir="rtl"] .sy-strap {
+    background: linear-gradient(270deg, #EDB21F, #F7E3A1 60%, #FBF1CF);
+}
+
+.sy-strap__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 32px;
+    padding-block: 16px;
+    color: #111;
+    font-weight: 700;
+}
+
+@media (max-width: 1023px) {
+    .sy-hero__grid { grid-template-columns: minmax(0, 1fr); gap: 56px; }
+}
+
+/* ---- Icon cards (network) ----------------------------------------------- */
+
+.sy-icons {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.sy-icon-card {
+    padding: 32px 24px;
+    border-radius: 24px;
+    background: var(--bg);
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+    transition: translate .4s var(--ease-out), box-shadow .4s var(--ease-out);
+}
+
+.sy-icon-card:hover {
+    translate: 0 -8px;
+    box-shadow: 0 24px 48px rgba(161, 108, 0, .18);
+}
+
+.sy-icon-card__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 84px;
+    height: 84px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--sun);
+}
+
+.sy-icon-card__icon .icon {
+    width: 42px;
+    height: 42px;
+    stroke-width: 1.8;
+}
+
+.sy-icon-card h3 {
+    margin-bottom: 10px;
+    color: var(--accent);
+    font-size: var(--fs-md);
+}
+
+.sy-icon-card p {
+    color: #222;
+    font-size: 17px;
+}
+
+@media (max-width: 1023px) {
+    .sy-icons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+    .sy-icons { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- Chain -------------------------------------------------------------- */
+
+.sy-chain {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+.sy-chain li {
+    position: relative;
+}
+
+.sy-chain li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 44px;
+    inset-inline-start: calc(50% + 56px);
+    width: calc(100% - 112px + 24px);
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--sun) 0 8px, transparent 8px 14px);
+}
+
+.sy-chain__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 88px;
+    height: 88px;
+    margin-bottom: 16px;
+    border: 2px solid var(--sun);
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--sun);
+}
+
+.sy-chain__icon .icon {
+    width: 40px;
+    height: 40px;
+}
+
+.sy-chain h3 {
+    margin-bottom: 4px;
+    color: var(--accent);
+    font-size: var(--fs-md);
+}
+
+.sy-chain p {
+    color: #222;
+}
+
+.sy-points {
+    max-width: 900px;
+    margin-inline: auto;
+    padding: 28px 36px;
+    border-radius: 24px;
+    background: var(--bg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+}
+
+.sy-points li {
+    position: relative;
+    padding-inline-start: 22px;
+    color: #111;
+    font-size: 18px;
+}
+
+.sy-points li + li {
+    margin-top: 10px;
+}
+
+.sy-points li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    top: .75em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--sun);
+}
+
+@media (max-width: 1023px) {
+    .sy-chain { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .sy-chain li::after { display: none; }
+}
+
+/* ---- Specs -------------------------------------------------------------- */
+
+.sy-specs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 64px;
+    max-width: 1000px;
+    margin-inline: auto;
+}
+
+.sy-spec {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.sy-spec__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: var(--sun);
+    color: var(--bg);
+    box-shadow: 0 12px 28px rgba(242, 183, 5, .35);
+}
+
+.sy-spec__icon .icon {
+    width: 42px;
+    height: 42px;
+}
+
+.sy-spec strong {
+    display: block;
+    color: var(--accent);
+    font-size: 26px;
+    line-height: 1.3;
+}
+
+.sy-spec__label {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.sy-spec p {
+    margin-top: 4px;
+    color: #111;
+}
+
+@media (max-width: 767px) {
+    .sy-specs { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- Product ------------------------------------------------------------ */
+
+.sy-product__panel {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    width: 32%;
+    background: linear-gradient(180deg, #F7E3A1, #EDB21F);
+}
+
+.sy-product__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: 64px;
+    align-items: center;
+}
+
+.sy-product__name {
+    margin-block: 12px 20px;
+    color: var(--accent);
+    font-size: var(--fs-lg);
+    font-weight: 700;
+}
+
+.sy-product__text {
+    max-width: 52ch;
+    color: #111;
+    font-size: 20px;
+}
+
+.sy-badges {
+    display: grid;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.sy-badges li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--accent);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.sy-badges .icon {
+    width: 34px;
+    height: 34px;
+    color: var(--sun);
+}
+
+@media (max-width: 1023px) {
+    .sy-product__grid { grid-template-columns: minmax(0, 1fr); }
+    .sy-product__panel { width: 100%; inset-block-start: auto; height: 260px; }
+}
+
+/* ---- Chemistry ---------------------------------------------------------- */
+
+.sy-chem {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.sy-chem__item {
+    position: relative;
+    padding: 32px 16px;
+    border-radius: 24px;
+    background: var(--bg);
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+    overflow: hidden;
+}
+
+/* Gold fill that rises behind each figure as it appears. */
+.sy-chem__item::before {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 0;
+    background: linear-gradient(180deg, transparent, rgba(242, 183, 5, .18));
+    transition: height 1.4s var(--ease-out) .3s;
+}
+
+.sy-chem__item.aos-animate::before {
+    height: 100%;
+}
+
+.sy-chem dt {
+    position: relative;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.sy-chem__value {
+    position: relative;
+    margin-block: 8px;
+    color: #111;
+    font-size: clamp(40px, 4.4vw, 56px);
+    line-height: 1.1;
+}
+
+.sy-chem__text {
+    position: relative;
+    color: #333;
+    font-size: var(--fs-sm);
+}
+
+@media (max-width: 1023px) {
+    .sy-chem { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+    .sy-chem { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---- Features ----------------------------------------------------------- */
+
+.sy-features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 64px;
+    max-width: 1040px;
+    margin-inline: auto;
+}
+
+.sy-features li {
+    position: relative;
+    padding-inline-start: 22px;
+    color: #111;
+    font-size: 19px;
+}
+
+.sy-features li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    top: .75em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.sy-features li.is-accent {
+    color: var(--accent);
+}
+
+.sy-origin {
+    margin-top: 48px;
+    color: #444;
+    font-size: var(--fs-sm);
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    .sy-features { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- Guarantees --------------------------------------------------------- */
+
+.sy-guarantees {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 64px;
+}
+
+.sy-guarantee {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.sy-guarantee__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 84px;
+    height: 84px;
+    border: 4px solid var(--sun);
+    border-radius: 50%;
+    color: #111;
+    transition: background-color .4s;
+}
+
+.sy-guarantee:hover .sy-guarantee__icon {
+    background: var(--sun);
+}
+
+.sy-guarantee__icon .icon {
+    width: 38px;
+    height: 38px;
+}
+
+.sy-guarantee h3 {
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: clamp(22px, 2.4vw, 30px);
+}
+
+.sy-guarantee p {
+    color: #222;
+}
+
+@media (max-width: 767px) {
+    .sy-guarantees { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- Where to find us --------------------------------------------------- */
+
+.sy-find {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 72px;
+    align-items: center;
+}
+
+.sy-locations {
+    display: grid;
+    gap: 28px;
+    margin-top: 32px;
+}
+
+.sy-locations li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.sy-locations__pin {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--sun);
+    color: var(--bg);
+}
+
+.sy-locations h3 {
+    color: var(--accent);
+    font-size: 18px;
+}
+
+.sy-locations p {
+    color: #111;
+    font-size: 19px;
+}
+
+@media (max-width: 1023px) {
+    .sy-find { grid-template-columns: minmax(0, 1fr); gap: 56px; }
+}
+
+/* ---- Contact ------------------------------------------------------------ */
+
+.sy-contact {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 64px;
+    align-items: center;
+}
+
+.sy-contact__brand {
+    width: 180px;
+    height: auto;
+    margin-bottom: 24px;
+}
+
+.sy-contact__lead {
+    margin-top: 16px;
+    color: #111;
+    font-size: 18px;
+}
+
+.sy-contact .btn {
+    margin-top: 32px;
+}
+
+/* The yellow rounded panel from the PDF's final slide. */
+.sy-contact__panel {
+    padding: 48px;
+    border-radius: 40px;
+    background: #EDB21F;
+    color: #1A1406;
+    box-shadow: 0 30px 60px rgba(161, 108, 0, .25);
+}
+
+.sy-contact__panel h3 {
+    margin-bottom: 16px;
+    color: var(--bg);
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.2;
+}
+
+.sy-contact__panel .meta-row + .meta-row {
+    border-color: rgba(255, 255, 255, .45);
+}
+
+.sy-contact__panel .meta-row__label,
+.sy-contact__panel .meta-row__icon {
+    color: #3B2A00;
+}
+
+.sy-contact__panel .meta-row__values {
+    color: #111;
+    font-weight: 700;
+}
+
+@media (max-width: 1023px) {
+    .sy-contact { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 767px) {
+    .sy-contact__panel { padding: 32px 24px; border-radius: 28px; }
+}
+
+[data-theme="syria"] .cta__panel {
+    background: #111;
+}

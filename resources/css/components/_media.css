@@ -1,0 +1,31 @@
+/* ==========================================================================
+   Media — a photo at a fixed aspect ratio, or a grey placeholder
+   ========================================================================== */
+
+.media {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--border);
+}
+
+.media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.media__placeholder {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    background: var(--placeholder);
+    color: var(--muted);
+}
+
+.media__placeholder .icon {
+    width: 40px;
+    height: 40px;
+    stroke-width: 1;
+}

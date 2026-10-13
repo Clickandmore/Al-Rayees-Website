@@ -1,0 +1,98 @@
+/* ==========================================================================
+   Themes — one accent family per division
+   Applied to a whole page via body[data-theme] (division pages) or to a
+   single block via .theme-{division} (home rows, contact cards).
+
+     --accent          accent on light backgrounds (AA for text)
+     --accent-soft     tinted surface
+     --accent-on-dark  accent on navy / ink backgrounds
+   ========================================================================== */
+
+:root,
+[data-theme="group"] {
+    --accent: var(--gold);
+    --accent-soft: #F6EFDF;
+    --accent-on-dark: var(--gold);
+}
+
+/* Charcoal — ember on charcoal black */
+[data-theme="charcoal"],
+.theme-charcoal {
+    --accent: #C2410C;
+    --accent-soft: #FBEBDD;
+    --accent-on-dark: #F08A3C;
+    --ink: #141619;
+    --ink-2: #1D2024;
+    --on-ink: #C8CCD1;
+}
+
+/* Dana Roz — burgundy and ivory, classical display type */
+[data-theme="danaroz"],
+.theme-danaroz {
+    --accent: #7A2E3A;
+    --accent-soft: #F6EEE6;
+    --accent-on-dark: #E3C08A;
+    --ivory: #FBF7F2;
+    --font-display: "Amiri", "Times New Roman", serif;
+}
+
+[data-theme="danaroz"]:lang(en),
+:lang(en) .theme-danaroz {
+    --font-display: "Playfair Display", Georgia, serif;
+}
+
+/* Amtech — clinical teal */
+[data-theme="amtech"],
+.theme-amtech {
+    --accent: #0F766E;
+    --accent-soft: #E7F4F2;
+    --accent-on-dark: #5EEAD4;
+    --radius-lg: 16px;
+}
+
+/* Leadwell — royal blue */
+[data-theme="leadwell"],
+.theme-leadwell {
+    --accent: #1E4FA3;
+    --accent-soft: #EAF0FA;
+    --accent-on-dark: #8DB4F5;
+    --royal: #102A5C;
+    --on-royal: #C9D6EF;
+}
+
+/* ---- Division profiles — each follows its own PDF ---------------------- */
+
+/* Jordan — black, signal yellow, gold contour lines */
+[data-theme="jordan"] {
+    --accent: #B8860B;
+    --accent-soft: #FFF6D6;
+    --accent-on-dark: #F5C518;
+    --ink: #000;
+    --ink-2: #121212;
+    --on-ink: #D4D4D4;
+    --font-display: "Alexandria", var(--font-ar);
+}
+
+/* Syria — white with warm yellow-gold discs */
+[data-theme="syria"] {
+    --accent: #A16C00;
+    --accent-soft: #FFF4D2;
+    --accent-on-dark: #F2B705;
+    --sun: #F2B705;
+    --sun-2: #F7D774;
+    --font-display: "Alexandria", var(--font-ar);
+}
+
+/* Amtech profile — bright clinical teal */
+[data-theme="amtech-profile"] {
+    --accent: #0E7C70;
+    --accent-soft: #E3FAF6;
+    --accent-on-dark: #2DD9C5;
+    --teal: #2DD9C5;
+    --teal-deep: #0E7C70;
+    --font-display: "Lexend", var(--font-en);
+}
+
+[data-theme="amtech-profile"]:lang(ar) {
+    --font-display: var(--font-ar);
+}

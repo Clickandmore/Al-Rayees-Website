@@ -1,189 +1,106 @@
 /* ==========================================================================
-   Buttons & pills
+   Buttons — rectangular; navy solid or navy outline
    ========================================================================== */
 
 .btn {
-    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
-    padding: 0.85rem 1.5rem;
-    border-radius: var(--r-pill);
-    font-size: var(--fs-sm);
-    font-weight: 600;
-    line-height: 1;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 24px;
+    border: 1px solid var(--navy);
+    border-radius: var(--radius);
+    font-size: var(--fs-base);
+    font-weight: 700;
+    line-height: 1.2;
     white-space: nowrap;
-    isolation: isolate;
-    overflow: hidden;
-    transition: transform var(--t-mid) var(--ease-spring), color var(--t-fast),
-        border-color var(--t-fast), box-shadow var(--t-mid);
+    transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 
-.btn svg {
-    inline-size: 15px;
-    block-size: 15px;
-    transition: transform var(--t-mid) var(--ease-out);
+.btn .icon {
+    width: 18px;
+    height: 18px;
 }
-
-[dir='rtl'] .btn svg.icon-arrow {
-    scale: -1 1;
-}
-
-.btn:hover svg.icon-arrow {
-    transform: translateX(3px);
-}
-
-[dir='rtl'] .btn:hover svg.icon-arrow {
-    transform: translateX(-3px);
-}
-
-/* ---- Primary — accent fill with a sweeping sheen ------------------------- */
 
 .btn--primary {
-    color: var(--ink-1000);
-    background: linear-gradient(115deg, var(--accent-2), var(--accent));
-    box-shadow: 0 14px 34px -18px rgba(var(--accent-rgb), 0.9);
-}
-
-.btn--primary::after {
-    content: '';
-    position: absolute;
-    inset-block: -50%;
-    inline-size: 45%;
-    inset-inline-start: -60%;
-    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
-    transform: skewX(-18deg);
-    transition: inset-inline-start 0.75s var(--ease-out);
-    z-index: -1;
+    background: var(--navy);
+    color: var(--bg);
 }
 
 .btn--primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 20px 44px -18px rgba(var(--accent-rgb), 1);
+    background: var(--text);
+    border-color: var(--text);
 }
 
-.btn--primary:hover::after {
-    inset-inline-start: 120%;
+.btn--outline {
+    background: transparent;
+    color: var(--navy);
 }
 
-/* ---- Ghost — hairline that fills on hover -------------------------------- */
-
-.btn--ghost {
-    color: var(--fg);
-    border: 1px solid var(--line-2);
-    background: var(--glass-2);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-
-.btn--ghost::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(120% 140% at 50% 120%, rgba(var(--accent-rgb), 0.28), transparent 70%);
-    opacity: 0;
-    transition: opacity var(--t-mid) var(--ease-out);
-    z-index: -1;
-}
-
-.btn--ghost:hover {
-    transform: translateY(-2px);
-    border-color: rgba(var(--accent-rgb), 0.55);
-}
-
-.btn--ghost:hover::before {
-    opacity: 1;
+.btn--outline:hover {
+    background: var(--navy);
+    color: var(--bg);
 }
 
 .btn--sm {
-    padding: 0.6rem 1.05rem;
-    font-size: var(--fs-micro);
-}
-
-.btn--block {
-    inline-size: 100%;
-}
-
-/* ---- Text link with an animated underline -------------------------------- */
-
-.link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+    min-height: 40px;
+    padding: 0 18px;
     font-size: var(--fs-sm);
-    font-weight: 500;
-    color: var(--accent);
-    padding-block-end: 2px;
 }
 
-.link::after {
-    content: '';
-    position: absolute;
-    inset-block-end: 0;
-    inset-inline: 0;
-    block-size: 1px;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--t-mid) var(--ease-out);
-}
-
-[dir='rtl'] .link::after {
-    transform-origin: right;
-}
-
-.link:hover::after {
-    transform: scaleX(1);
-}
-
-.link svg {
-    inline-size: 14px;
-    block-size: 14px;
-}
-
-[dir='rtl'] .link svg.icon-arrow {
-    scale: -1 1;
-}
-
-/* ---- Pills / chips ------------------------------------------------------- */
-
-.pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.42rem 0.85rem;
-    border-radius: var(--r-pill);
-    border: 1px solid var(--line-2);
-    background: var(--glass-2);
-    font-size: var(--fs-micro);
-    color: var(--fg-2);
-    white-space: nowrap;
-    transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
-}
-
-.pill:hover {
-    border-color: rgba(var(--accent-rgb), 0.45);
-    color: var(--fg);
-}
-
-.pill--accent {
-    border-color: rgba(var(--accent-rgb), 0.32);
-    background: rgba(var(--accent-rgb), 0.08);
-    color: var(--accent-2);
-}
-
-.pill__dot {
-    inline-size: 5px;
-    block-size: 5px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex: none;
-}
-
-.pill-row {
+.btn-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.55rem;
+    gap: 12px;
+}
+
+/* For navy / ink / royal bands */
+.btn--light {
+    background: var(--bg);
+    border-color: var(--bg);
+    color: var(--navy);
+}
+
+.btn--light:hover {
+    background: var(--bg-alt);
+    border-color: var(--bg-alt);
+}
+
+.btn--ghost-light {
+    background: transparent;
+    border-color: rgba(255, 255, 255, .45);
+    color: var(--bg);
+}
+
+.btn--ghost-light:hover {
+    background: rgba(255, 255, 255, .1);
+    border-color: var(--bg);
+}
+
+/* The arrow nudges forward on hover (mirrored on RTL via .icon-flip). */
+.btn__arrow {
+    transition: translate var(--dur) var(--ease-out);
+}
+
+.btn:hover .btn__arrow {
+    translate: 4px 0;
+}
+
+[dir="rtl"] .btn:hover .btn__arrow {
+    translate: -4px 0;
+}
+
+.link-arrow .icon {
+    transition: translate var(--dur) var(--ease-out);
+}
+
+a.link-arrow:hover .icon,
+.division-row:hover .link-arrow .icon {
+    translate: 4px 0;
+}
+
+[dir="rtl"] a.link-arrow:hover .icon,
+[dir="rtl"] .division-row:hover .link-arrow .icon {
+    translate: -4px 0;
 }

@@ -5,8 +5,9 @@
      A value may hold several entries separated by "·" (three phone numbers,
      two WhatsApp lines …). Each one is split onto its own row so the digits
      stack into a clean column instead of wrapping mid-run, and each is turned
-     into a real tel: / mailto: / wa.me link. Values are bidi-isolated so Latin
-     numbers read correctly inside Arabic (RTL) copy. --}}
+     into a real tel: / mailto: / wa.me link. Linked values are forced LTR so
+     Latin numbers read correctly inside Arabic copy; plain text (addresses)
+     is wrapped in <bdi> so Arabic keeps its own order. --}}
 
 @php
     // Guesses what a value is from its own shape. An item may override with
@@ -86,7 +87,7 @@
                         </a>
                     @else
                         <span class="{{ $classes }} meta-value--static">
-                            <span class="ltr">{{ $value }}</span>
+                            <bdi>{{ $value }}</bdi>
                         </span>
                     @endif
                 @endforeach

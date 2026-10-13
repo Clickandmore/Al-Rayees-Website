@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Closing CTA — a navy panel with the monogram as a watermark
+   ========================================================================== */
+
+.cta__panel {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 64px;
+    overflow: hidden;
+    background: var(--navy);
+    border-radius: var(--radius-lg);
+    color: var(--on-navy);
+}
+
+.cta__mark {
+    position: absolute;
+    inset-inline-end: -40px;
+    top: 50%;
+    height: 150%;
+    width: auto;
+    opacity: .1;
+    translate: 0 -50%;
+    pointer-events: none;
+}
+
+.cta__text {
+    position: relative;
+    max-width: 620px;
+}
+
+.cta__rule {
+    display: block;
+    width: 48px;
+    height: 3px;
+    margin-bottom: 20px;
+    background: var(--accent-on-dark);
+}
+
+.cta__title {
+    margin-bottom: 12px;
+    color: var(--bg);
+    font-size: var(--fs-xl);
+}
+
+.cta__actions {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+@media (max-width: 767px) {
+    .cta__panel {
+        padding: 40px 24px;
+    }
+
+    .cta__actions,
+    .cta__actions .btn {
+        width: 100%;
+    }
+}

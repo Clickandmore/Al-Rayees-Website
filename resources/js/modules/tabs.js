@@ -1,37 +1,27 @@
 /**
  * Tabs
- * Accessible tab list with a sliding marker. Markup contract:
+ * Accessible tab list. Markup contract:
  *
  *   [data-tabs]
  *     [role=tablist] > button[role=tab][aria-controls][aria-selected]
- *     [data-tabs-marker]
- *     [role=tabpanel][id]
+ *     [role=tabpanel][id]   (all but the selected one carry `hidden`)
  */
 export default function initTabs() {
     document.querySelectorAll('[data-tabs]').forEach((root) => {
         const tabs = [...root.querySelectorAll('[role="tab"]')];
-        const marker = root.querySelector('[data-tabs-marker]');
 
         if (!tabs.length) return;
-
-        const moveMarker = (tab) => {
-            if (!marker) return;
-            // offsetLeft is relative to the tab list's border box; the marker is
-            // placed against its padding box, so drop the border width.
-            const offset = tab.offsetLeft - tab.parentElement.clientLeft;
-            marker.style.setProperty('--marker-w', `${tab.offsetWidth}px`);
-            marker.style.setProperty('--marker-x', `${offset}px`);
-        };
 
         const select = (tab, focus = true) => {
             tabs.forEach((t) => {
                 const on = t === tab;
                 t.setAttribute('aria-selected', String(on));
                 t.setAttribute('tabindex', on ? '0' : '-1');
-                document.getElementById(t.getAttribute('aria-controls'))?.classList.toggle('is-active', on);
+
+                const panel = document.getElementById(t.getAttribute('aria-controls'));
+                if (panel) panel.hidden = !on;
             });
 
-            moveMarker(tab);
             if (focus) tab.focus();
         };
 
@@ -55,15 +45,5 @@ export default function initTabs() {
                 }
             });
         });
-
-        const initial = tabs.find((t) => t.getAttribute('aria-selected') === 'true') || tabs[0];
-        select(initial, false);
-
-        // The marker is measured from layout, so re-run once fonts settle.
-        window.addEventListener('resize', () => moveMarker(
-            tabs.find((t) => t.getAttribute('aria-selected') === 'true') || tabs[0]
-        ), { passive: true });
-
-        document.fonts?.ready.then(() => moveMarker(initial));
     });
 }

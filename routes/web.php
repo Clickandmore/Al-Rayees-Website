@@ -1,26 +1,29 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-| The site is a single page rendered in two languages. Each language gets
-| its own URL so it can be linked, shared and indexed independently:
+| Every page in config('site.pages') is registered once per locale:
 |
-|   /     → Arabic  (RTL, default)
-|   /en   → English (LTR)
+|   /about      → Arabic  (RTL, default)
+|   /en/about   → English (LTR)
 |
-| The locale is attached as a route default and picked up by the
-| SetLocale middleware, which also shares the text direction with views.
+| Routes are named "{locale}.{page}" (e.g. "en.charcoal"). The locale and
+| page key are attached as route defaults and picked up by the SetLocale
+| middleware, which shares them with every view.
 */
 
-Route::get('/', [HomeController::class, 'index'])
-    ->defaults('locale', 'ar')
-    ->name('home.ar');
+foreach (config('site.locales') as $locale => $config) {
+    foreach (config('site.pages') as $page => $meta) {
+        $uri = trim($config['prefix'] . '/' . $meta['slug'], '/');
 
-Route::get('/en', [HomeController::class, 'index'])
-    ->defaults('locale', 'en')
-    ->name('home.en');
+        Route::get($uri === '' ? '/' : $uri, PageController::class)
+            ->defaults('locale', $locale)
+            ->defaults('page', $page)
+            ->name("{$locale}.{$page}");
+    }
+}
