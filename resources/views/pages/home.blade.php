@@ -37,14 +37,14 @@
             <div class="home-hero__visual">
                 <figure class="home-hero__photo">
                     <img
-                        src="{{ asset('assets/images/group-factory.jpg') }}"
-                        alt="{{ __('site.charcoal.factory.4.value') }}"
-                        width="1200" height="900" fetchpriority="high"
+                        src="{{ asset('assets/images/charcoal-glow.jpg') }}"
+                        alt="{{ __('site.charcoal.name') }}"
+                        width="720" height="960" fetchpriority="high"
                     >
                 </figure>
 
-                <figure class="home-hero__photo home-hero__photo--small" data-aos="zoom-in" data-aos-delay="700">
-                    <img src="{{ asset('assets/images/amtech-crowns.jpg') }}" alt="{{ __('site.amtech.name') }}" width="900" height="675" loading="lazy">
+                <figure class="home-hero__photo home-hero__photo--small photo--product" data-aos="zoom-in" data-aos-delay="700">
+                    <img src="{{ asset('assets/images/jordan/product-3.jpg') }}" alt="" width="720" height="655" loading="lazy">
                 </figure>
 
                 @php $years = __('site.stats')[2]; @endphp
@@ -70,8 +70,8 @@
                 <figure class="overview__photo" data-aos="{{ $aosStart }}">
                     <img src="{{ asset('assets/images/charcoal-sorting.jpg') }}" alt="" width="1200" height="900" loading="lazy">
                 </figure>
-                <figure class="overview__photo overview__photo--inset" data-aos="zoom-in" data-aos-delay="250">
-                    <img src="{{ asset('assets/images/charcoal-product.jpg') }}" alt="" width="1000" height="750" loading="lazy">
+                <figure class="overview__photo overview__photo--inset photo--product" data-aos="zoom-in" data-aos-delay="250">
+                    <img src="{{ asset('assets/images/jordan/product-2.jpg') }}" alt="" width="720" height="465" loading="lazy">
                 </figure>
             </div>
 

@@ -28,7 +28,7 @@ return [
         'lead'  => 'Manufacturing, packing and storage through our networks in Syria',
         'items' => [
             ['icon' => 'trending', 'title' => 'Sustainable growth',     'text' => 'Wholesale warehouses in Syria to supply every order, whatever its size'],
-            ['icon' => 'shield',   'title' => 'Consistent specification', 'text' => 'Moisture ≤ 8%, guaranteed in every shipment without exception'],
+            ['icon' => 'shield',   'title' => 'Consistent specification', 'text' => 'A controlled specification, guaranteed in every shipment without exception'],
             ['icon' => 'globe',    'title' => 'One direct source',      'text' => 'From our factory to yours, with no middlemen in between'],
             ['icon' => 'factory',  'title' => 'A manufacturing base',   'text' => 'Syrian factories waiting for a reliable, regular supplier'],
         ],
@@ -78,7 +78,7 @@ return [
         'items' => [
             ['value' => 14,  'suffix' => '%', 'label' => 'Volatile matter', 'text' => 'A clean burn without excess smoke'],
             ['value' => 85,  'suffix' => '%', 'label' => 'Carbon content',  'text' => 'Purity that translates directly into reliable performance'],
-            ['value' => 5,   'suffix' => '%', 'label' => 'Moisture',        'text' => 'Well below the permitted limit of ≤ 8%'],
+            ['value' => 5,   'suffix' => '%', 'label' => 'Moisture',        'text' => 'Well below the permitted limit'],
             ['value' => 600, 'suffix' => '°', 'label' => 'Heat output',     'text' => 'Energy that speaks for itself'],
             ['value' => 2.5, 'suffix' => '%', 'label' => 'Ash content',     'text' => 'An indicator of raw-material purity'],
         ],
@@ -138,7 +138,7 @@ return [
     'contact' => [
         'title'  => 'Contact us — we\'ll take care of the rest',
         'lead'   => 'A free sample, an instant quote or a trial shipment — we\'re here.',
-        'note'   => 'Shisha charcoal, moisture ≤ 8%, UN packing, direct delivery to Syria.',
+        'note'   => 'Premium-grade shisha charcoal, UN packing, direct delivery to Syria.',
         'panel'  => 'Get in touch',
         'rows'   => [
             ['label' => 'Hama branch phone', 'value' => '00963944630136'],

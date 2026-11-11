@@ -90,11 +90,38 @@
     animation: reveal-up 1.3s var(--ease-out) .2s both;
 }
 
+.home-hero__photo {
+    position: relative;
+    background: #0d0f14;
+    box-shadow: var(--shadow-lg);
+}
+
 .home-hero__photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 60%;
     animation: settle 2.4s var(--ease-out) .2s both;
+}
+
+/* Soft dark fade at the bottom so the photo sits better on the page. */
+.home-hero__photo:not(.home-hero__photo--small)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(13, 15, 20, .35), transparent 45%);
+    pointer-events: none;
+}
+
+/* Product shots on a black backdrop: show the whole product, never crop it. */
+.photo--product {
+    background: #000;
+}
+
+.photo--product img {
+    object-fit: contain;
+    object-position: center;
+    padding: 6px;
 }
 
 .home-hero__photo--small {
