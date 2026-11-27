@@ -64,7 +64,8 @@ h3{font-size:var(--h3);line-height:1.5;font-weight:700}
 .ftr .wrap{padding-block:64px 24px;display:grid;gap:40px;grid-template-columns:1.4fr repeat(3,1fr)}
 .ftr h4{margin:0 0 12px;color:#fff;font-size:15px}
 .ftr ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.ftr a:hover{color:#fff}
+.ftr a{color:inherit}.ftr a:hover{color:#fff}
+.hdr a,.drawer a{color:var(--ink)}.hdr .btn-navy,.drawer .btn-navy{color:#fff}
 .ftr .brand img{height:58px;width:auto;margin-bottom:14px}
 .ftr .base{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.14);padding-top:20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px}
 @media (max-width:900px){.ftr .wrap{grid-template-columns:1fr 1fr}.ftr .brand{grid-column:1/-1}}
