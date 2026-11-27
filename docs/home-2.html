@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مجموعة الريس — التصميم 2</title>
+<meta name="description" content="مجموعة الريس — ستة أنشطة صناعية وتجارية وخدمية: الفحم، السجّاد والمفروشات، مختبرات الأسنان، والتوظيف والاستقدام.">
+<link rel="icon" href="assets/brand/mark.svg">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.x-hero{background:var(--navy);color:#fff;padding-block:clamp(48px,7vw,96px) 0;overflow:hidden}
+.x-hero h1{max-width:14ch}
+.x-hero h1 span{color:var(--gold-2)}
+.x-top{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(40px,6vw,72px)}
+.x-body{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start;padding-bottom:clamp(48px,6vw,80px)}
+.x-list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(255,255,255,.16)}
+.x-row{display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:16px;padding:20px 4px;border-bottom:1px solid rgba(255,255,255,.16);cursor:pointer;transition:padding .2s,background .2s;position:relative}
+.x-row .n{font-size:14px;color:#8E99A6;font-weight:700}
+.x-row h3{font-size:clamp(20px,2.4vw,30px);transition:color .2s}
+.x-row small{display:block;font-size:14px;color:#8E99A6;font-weight:500}
+.x-row .go{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:inline-flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+.x-row .go svg{width:18px;height:18px}
+.x-row::before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--c);transform:scaleY(0);transition:transform .2s}
+.x-row.on,.x-row:hover{padding-inline-start:16px;background:rgba(255,255,255,.03)}
+.x-row.on::before{transform:none}
+.x-row.on h3{color:#fff}.x-row.on .go{background:var(--c);border-color:var(--c)}
+.x-stage{position:sticky;top:96px;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:var(--navy-2)}
+.x-pane{position:absolute;inset:0;opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;gap:10px;isolation:isolate}
+.x-pane.on{opacity:1}
+.x-pane .media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.x-pane .art{display:flex;align-items:center;justify-content:center;overflow:hidden}
+.x-pane .stripes{display:grid;grid-template-columns:repeat(3,1fr)}
+.x-pane::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(5,12,20,.85),rgba(5,12,20,0) 55%)}
+.x-pane p{color:#D5DAE0;max-width:40ch}
+.x-pane .place{font-size:13px;font-weight:700;color:var(--gold-2)}
+@media (max-width:900px){.x-top,.x-body{grid-template-columns:1fr}.x-stage{display:none}
+ .x-row{grid-template-columns:1fr auto;padding:0;overflow:hidden;border-radius:14px;border:0;margin-bottom:12px;background:var(--navy-2)}
+ .x-list{border:0}.x-row .n{display:none}
+ .x-row .thumb{display:block!important;grid-column:1/-1;height:160px;position:relative}
+ .x-row .thumb .media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+ .x-row .thumb .art{display:flex;align-items:center;justify-content:center;overflow:hidden}.x-row .thumb .stripes{display:grid;grid-template-columns:repeat(3,1fr)}
+ .x-row>div{padding:16px}.x-row .go{margin-inline-end:16px}.x-row::before{display:none}.x-row.on,.x-row:hover{padding-inline-start:0}}
+</style>
+</head>
+<body>
+<header class="hdr"><div class="wrap">
+<a class="logo" href="index.html" aria-label="مجموعة الريس — الرئيسية"><img src="assets/brand/logo-ar.svg" alt="الريس للاستثمارات الصناعية"></a>
+<nav class="nav" aria-label="القائمة الرئيسية"><a href="index.html" aria-current="page">الرئيسية</a><a href="index.html#about">من نحن</a><a href="index.html#divisions">الأنشطة</a><a href="index.html#markets">الأسواق</a><a href="index.html#contact">تواصل معنا</a></nav>
+<div class="hdr-cta"><a class="lang" href="https://alrayees.com/en" lang="en">EN</a><a class="btn btn-navy" href="index.html#contact">تواصل معنا</a>
+<button class="menu-btn" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
+</div>
+<div class="drawer" id="drawer"><nav aria-label="قائمة الجوال"><a href="index.html">الرئيسية</a><a href="charcoal.html">فحم الريس<small>صناعة وتصدير الفحم</small></a><a href="dana-roz.html">دانا روز<small>مفروشات راقية</small></a><a href="amtech.html">أمتك للأسنان<small>مختبر أسنان رقمي</small></a><a href="leadwell.html">ليدويل<small>توظيف دولي منذ 1996</small></a><a href="mazhar.html">مؤسسة مظهر الريس<small>استقدام العمالة المنزلية</small></a><a href="rays-carpet.html">Rays Carpet<small>تصنيع وتصدير السجّاد</small></a><a href="index.html#about">من نحن</a><a href="index.html#divisions">الأنشطة</a><a href="index.html#markets">الأسواق</a><a href="index.html#contact">تواصل معنا</a><a class="btn btn-navy" href="index.html#contact">تواصل معنا</a></nav></div>
+</header>
+<main id="top">
+<section class="x-hero"><div class="wrap">
+<div class="x-top"><div style="display:grid;gap:18px"><span class="eyebrow">مجموعة الريس · منذ 1996</span><h1>خبرة صناعية تمتد <span>عبر القارات.</span></h1></div>
+<div style="display:grid;gap:18px"><p class="lead">ستة أنشطة متخصصة تحت مظلة واحدة — مرّر على أي نشاط لتتعرّف عليه.</p><div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-gold" href="#contact">تواصل معنا</a><a class="btn btn-ghost" href="#about">من نحن</a></div></div></div>
+<div class="x-body" id="divisions"><ul class="x-list"><li><a class="x-row on" href="charcoal.html" data-tab="0" style="--c:var(--c-charcoal)"><span class="thumb" style="display:none"><img class="media" src="assets/images/charcoal-glow.jpg" alt="" loading="lazy"></span><span class="n">01</span><div><h3>فحم الريس</h3><small>صناعة وتصدير الفحم</small></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span></a></li><li><a class="x-row" href="dana-roz.html" data-tab="1" style="--c:var(--c-dana)"><span class="thumb" style="display:none"><span class="media art" style="background:#F6EEE6"><img src="assets/illustrations/danaroz-carpet.svg" alt="" loading="lazy" style="height:80%;width:auto"></span></span><span class="n">02</span><div><h3>دانا روز</h3><small>مفروشات راقية</small></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span></a></li><li><a class="x-row" href="amtech.html" data-tab="2" style="--c:var(--c-amtech)"><span class="thumb" style="display:none"><img class="media" src="assets/images/amtech-hero.jpg" alt="" loading="lazy"></span><span class="n">03</span><div><h3>أمتك للأسنان</h3><small>مختبر أسنان رقمي</small></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span></a></li><li><a class="x-row" href="leadwell.html" data-tab="3" style="--c:var(--c-leadwell)"><span class="thumb" style="display:none"><span class="media art" style="background:#102A5C"><img src="assets/illustrations/map-land-dark.svg" alt="" loading="lazy" style="width:150%;max-width:none;opacity:.85"></span></span><span class="n">04</span><div><h3>ليدويل</h3><small>توظيف دولي منذ 1996</small></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span></a></li><li><a class="x-row" href="mazhar.html" data-tab="4" style="--c:var(--c-mazhar)"><span class="thumb" style="display:none"><span class="media art" style="background:#2F6B4F;color:#D7EBDF;font-weight:700;font-size:15px;align-items:flex-start;justify-content:flex-start;padding:18px">أوغندا · إندونيسيا</span></span><span class="n">05</span><div><h3>مؤسسة مظهر الريس</h3><small>استقدام العمالة المنزلية</small></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span></a></li><li><a class="x-row" href="rays-carpet.html" data-tab="5" style="--c:var(--c-rays)"><span class="thumb" style="display:none"><span class="media art stripes" aria-hidden="true"><i style="background:#8A4B22"></i><i style="background:#5C3A22"></i><i style="background:#B9764A"></i></span></span><span class="n">06</span><div><h3>Rays Carpet</h3><small>تصنيع وتصدير السجّاد</small></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span></a></li></ul><div class="x-stage"><div class="x-pane on" data-pane="0" aria-hidden="true"><img class="media" src="assets/images/charcoal-glow.jpg" alt="" loading="lazy"><span class="place">إندونيسيا · الفلبين · الأردن · سوريا</span><h3 style="font-size:28px">فحم الريس</h3><p>فحم قشر جوز الهند لمصانع الشيشة والشواء، من مصانعنا في إندونيسيا والفلبين.</p></div><div class="x-pane" data-pane="1" aria-hidden="true"><span class="media art" style="background:#F6EEE6"><img src="assets/illustrations/danaroz-carpet.svg" alt="" loading="lazy" style="height:80%;width:auto"></span><span class="place">مصر · سوريا</span><h3 style="font-size:28px">دانا روز</h3><p>مفروشات وسجّاد بتصاميم حصرية، أصالة مصرية وخبرة سورية.</p></div><div class="x-pane" data-pane="2" aria-hidden="true"><img class="media" src="assets/images/amtech-hero.jpg" alt="" loading="lazy"><span class="place">الفلبين</span><h3 style="font-size:28px">أمتك للأسنان</h3><p>أكثر من 15 خدمة في التركيبات وطب الأسنان الرقمي.</p></div><div class="x-pane" data-pane="3" aria-hidden="true"><span class="media art" style="background:#102A5C"><img src="assets/illustrations/map-land-dark.svg" alt="" loading="lazy" style="width:150%;max-width:none;opacity:.85"></span><span class="place">الفلبين</span><h3 style="font-size:28px">ليدويل</h3><p>كوادر فلبينية مؤهلة لدول الخليج والعالم، برخصة POEA.</p></div><div class="x-pane" data-pane="4" aria-hidden="true"><span class="media art" style="background:#2F6B4F;color:#D7EBDF;font-weight:700;font-size:15px;align-items:flex-start;justify-content:flex-start;padding:18px">أوغندا · إندونيسيا</span><span class="place">أوغندا · إندونيسيا</span><h3 style="font-size:28px">مؤسسة مظهر الريس</h3><p>عاملات من أوغندا وإندونيسيا لأعمال المنزل ورعاية الأطفال وكبار السن.</p></div><div class="x-pane" data-pane="5" aria-hidden="true"><span class="media art stripes" aria-hidden="true"><i style="background:#8A4B22"></i><i style="background:#5C3A22"></i><i style="background:#B9764A"></i></span><span class="place">مصر · 7 أسواق</span><h3 style="font-size:28px">Rays Carpet</h3><p>سجّاد منزلي وتجاري وسجّاد فنادق لسبعة أسواق عربية.</p></div></div></div>
+</div></section>
+<section class="sec" id="about"><div class="wrap split">
+<div style="display:grid;gap:20px"><span class="eyebrow">من نحن</span>
+<p class="manifesto">نحن <em>مُصنّعون</em>، ولسنا وسطاء. نملك خطوط الإنتاج، ونشرف على الجودة من <em>المصدر</em> حتى <em>التسليم</em>.</p></div>
+<div style="display:grid;gap:20px"><p class="lead">مجموعة الريس مجموعة أعمال متعددة الأنشطة والأسواق، تجمع بين الخبرة الصناعية والتجارية والخدمية عبر عدة دول — وكل نشاط يقوم على معايير جودة صارمة وتراخيص رسمية معتمدة.</p>
+<div class="chips"><span class="chip" lang="en">UN</span><span class="chip" lang="en">SEC</span><span class="chip" lang="en">POEA</span><span class="chip">السجل التجاري السوري</span></div></div>
+</div></section><section class="sec on-dark" style="padding-block:clamp(48px,6vw,72px)"><div class="wrap stats">
+<div class="stat"><b><span data-count="6">6</span></b><span>أنشطة متخصصة</span></div>
+<div class="stat"><b><span data-count="30">30</span><i>+</i></b><span>عاماً منذ 1996</span></div>
+<div class="stat"><b><span data-count="6">6</span></b><span>دول نعمل منها</span></div>
+<div class="stat"><b><span data-count="10">10</span></b><span>أسواق تصدير</span></div>
+</div></section><section class="sec" style="background:var(--sand)"><div class="wrap" style="display:grid;gap:40px">
+<div style="display:grid;gap:12px;max-width:640px"><span class="eyebrow">لماذا الريس</span><h2>ما يجمع أنشطتنا الستة</h2></div>
+<div class="why">
+<div><b>مُصنّع، لا وسيط</b><p>خطوط إنتاج نملكها، فتصلك الأسعار من المصدر مباشرة.</p></div>
+<div><b>جودة موثّقة</b><p>مواصفات تُقاس وتُختبر وتُوثّق مع كل شحنة.</p></div>
+<div><b>تراخيص رسمية</b><p>UN وSEC وPOEA وسجلات تجارية في كل دولة نعمل فيها.</p></div>
+<div><b>انتشار عبر القارات</b><p>من آسيا إلى الشرق الأوسط وأفريقيا.</p></div>
+<div><b>شراكات طويلة الأمد</b><p>عقود مرنة وتوريد منتظم مهما كان الحجم.</p></div>
+<div><b>شفافية كاملة</b><p>التفاصيل والتكاليف واضحة قبل أي اتفاق.</p></div>
+</div></div></section><section class="sec on-dark" id="markets" style="position:relative;overflow:hidden">
+<img src="assets/illustrations/map-land-dark.svg" alt="" aria-hidden="true" style="position:absolute;inset-inline-start:-10%;top:50%;transform:translateY(-50%);width:min(1100px,120%);max-width:none;opacity:.55">
+<div class="wrap split" style="position:relative">
+<div style="display:grid;gap:18px"><span class="eyebrow">الأسواق</span><h2>نُصنّع في آسيا، ونصل إلى كل قارة</h2><p class="lead">مصانع ومكاتب في الأردن وسوريا ومصر والفلبين وإندونيسيا، وشحن إلى الخليج والشام وشمال أفريقيا.</p></div>
+<div style="display:grid;gap:20px">
+<div style="display:grid;gap:10px"><span style="font-size:14px;color:#C5CBD3">نعمل من</span><div class="chips"><span class="chip">الأردن</span><span class="chip">سوريا</span><span class="chip">مصر</span><span class="chip">الفلبين</span><span class="chip">إندونيسيا</span><span class="chip">أوغندا</span></div></div>
+<div style="display:grid;gap:10px"><span style="font-size:14px;color:#C5CBD3">نصدّر إلى</span><div class="chips"><span class="chip">السعودية</span><span class="chip">الكويت</span><span class="chip">قطر</span><span class="chip">عُمان</span><span class="chip">العراق</span><span class="chip">لبنان</span><span class="chip">الجزائر</span><span class="chip">ليبيا</span><span class="chip">مصر</span><span class="chip">الأردن</span></div></div>
+</div></div></section><section class="sec" id="contact"><div class="wrap"><div class="cta">
+<div style="display:grid;gap:8px;max-width:560px"><h2>لنبدأ شراكة</h2><p class="lead">تواصل مع فريق المجموعة، ونوجّهك للنشاط المناسب لاحتياجك.</p></div>
+<div class="btns"><a class="btn btn-navy" href="https://wa.me/962787000185">راسلنا على واتساب</a><a class="btn btn-ghost" href="mailto:AlraiyesCorporation@alrayees.com">البريد الإلكتروني</a></div>
+</div></div></section>
+</main>
+<footer class="ftr"><div class="wrap">
+<div class="brand"><img src="assets/brand/logo-ar-gold.svg" alt="الريس للاستثمارات الصناعية"><p>مجموعة واحدة. جودة معتمدة. خبرة صناعية وتجارية وخدمية تمتد عبر القارات.</p></div>
+<div><h4>الأنشطة</h4><ul><li><a href="charcoal.html">فحم الريس</a></li><li><a href="dana-roz.html">دانا روز</a></li><li><a href="amtech.html">أمتك للأسنان</a></li><li><a href="leadwell.html">ليدويل</a></li><li><a href="mazhar.html">مؤسسة مظهر الريس</a></li><li><a href="rays-carpet.html">Rays Carpet</a></li></ul></div>
+<div><h4>المجموعة</h4><ul><li><a href="index.html#about">من نحن</a></li><li><a href="index.html#markets">الأسواق</a></li><li><a href="index.html#contact">تواصل معنا</a></li></ul></div>
+<div><h4>تواصل</h4><ul><li><a href="mailto:AlraiyesCorporation@alrayees.com" lang="en">AlraiyesCorporation@alrayees.com</a></li><li><a href="mailto:charcoal@alrayees.com" lang="en">charcoal@alrayees.com</a></li><li><a href="tel:+639616416818" dir="ltr">+63 961 641 6818</a></li><li><a href="https://wa.me/962787000185">واتساب <span dir="ltr">+962 78 700 0185</span></a></li></ul></div>
+<div class="base"><span>© 2026 مجموعة الريس. جميع الحقوق محفوظة.</span><a href="https://alrayees.com/en" lang="en">English</a></div>
+</div></footer>
+<nav class="switcher" aria-label="خيارات التصميم"><a href="index.html">تصميم 1 · بينتو</a><a href="home-2.html" aria-current="page">تصميم 2 · الفهرس</a><a href="home-3.html">تصميم 3 · سينمائي</a></nav>
+<script>
+(function(){
+ var b=document.querySelector('.menu-btn'),d=document.getElementById('drawer');
+ if(b&&d){b.addEventListener('click',function(){var o=d.classList.toggle('open');b.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':''});
+  d.addEventListener('click',function(e){if(e.target.closest('a')){d.classList.remove('open');b.setAttribute('aria-expanded','false');document.body.style.overflow=''}})}
+ var tabs=document.querySelectorAll('[data-tab]');
+ tabs.forEach(function(t){t.addEventListener('mouseenter',act);t.addEventListener('focus',act);t.addEventListener('click',act);
+  function act(){var i=t.getAttribute('data-tab');tabs.forEach(function(x){x.classList.toggle('on',x===t)});document.querySelectorAll('[data-pane]').forEach(function(p){p.classList.toggle('on',p.getAttribute('data-pane')===i)})}});
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var el=e.target,n=+el.getAttribute('data-count'),s=null;io.unobserve(el);
+   function f(ts){if(!s)s=ts;var p=Math.min((ts-s)/1100,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)})},{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(function(el){io.observe(el)})}
+})();
+</script>
+</body>
+</html>
