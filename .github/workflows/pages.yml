@@ -1,4 +1,4 @@
-# Builds the Laravel site as static HTML and publishes it to GitHub Pages.
+# Publishes the static redesign in docs/ to GitHub Pages.
 # One-time setup: Settings → Pages → Source: "GitHub Actions".
 name: Deploy static site to GitHub Pages
 
@@ -17,53 +17,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          tools: composer
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: |
-          composer install --no-dev --no-interaction --prefer-dist
-          npm ci
-
-      - name: Build assets
-        run: npm run build
-
-      - name: Prepare environment
-        run: |
-          cp .env.example .env
-          sed -i 's/^APP_ENV=.*/APP_ENV=production/; s/^APP_DEBUG=.*/APP_DEBUG=false/' .env
-          php artisan key:generate
-
-      - id: pages
-        uses: actions/configure-pages@v5
-
-      - name: Export static HTML
-        run: bash scripts/export-static.sh
-        env:
-          BASE_URL: ${{ steps.pages.outputs.base_url }}
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
       - id: deployment
         uses: actions/deploy-pages@v4
